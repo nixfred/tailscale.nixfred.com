@@ -1,0 +1,140 @@
+---
+// Site chrome: header, nav, footer. Wraps Base. Every content page
+// passes through here so Law 11 (links home, repo link, version) and
+// the single disclosure line hold on every page automatically.
+import Base from './Base.astro';
+import { buildVersion } from '../lib/version';
+
+interface Props {
+  title: string;
+  description: string;
+  surface?: 'editorial' | 'crisis';
+}
+
+const { title, description, surface = 'editorial' } = Astro.props;
+const version = buildVersion();
+const path = Astro.url.pathname.replace(/\.html$/, '');
+const nav = [
+  { href: '/learn', label: 'Learn' },
+  { href: '/sources', label: 'Sources' },
+];
+---
+
+<Base title={title} description={description} surface={surface}>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="/">
+        <svg viewBox="0 0 32 32" aria-hidden="true" class="mark">
+          <path d="M16 8 L9 22 L23 22 Z" fill="none" stroke="var(--line)" stroke-width="1.5"></path>
+          <circle cx="16" cy="8" r="3.2" fill="var(--accent)"></circle>
+          <circle cx="9" cy="22" r="3.2" fill="var(--accent)"></circle>
+          <circle cx="23" cy="22" r="3.2" fill="var(--accent)"></circle>
+        </svg>
+        <span>Tailscale Field Guide</span>
+      </a>
+      <nav aria-label="Site">
+        {nav.map((item) => (
+          <a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </div>
+  </header>
+
+  <slot />
+
+  <footer class="site-footer">
+    <div class="inner">
+      <p class="mono meta">
+        Built by <a href="https://nixfred.com">Fred Nix</a> ·
+        <a href="https://github.com/nixfred/tailscale.nixfred.com">source</a> ·
+        <span>{version}</span>
+      </p>
+      <p class="disclosure">
+        Unofficial. This site is not affiliated with or endorsed by Tailscale Inc.
+        Tailscale is a trademark of Tailscale Inc.
+      </p>
+    </div>
+  </footer>
+</Base>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    height: var(--header-h);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .site-header .inner {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    height: 100%;
+    padding: 0 var(--space-4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .mark {
+    width: 26px;
+    height: 26px;
+  }
+
+  nav {
+    display: flex;
+    gap: var(--space-3);
+  }
+
+  nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    padding: var(--space-2);
+  }
+
+  nav a:hover,
+  nav a[aria-current='page'] {
+    color: var(--accent);
+  }
+
+  .site-footer {
+    border-top: 1px solid var(--line);
+    margin-top: var(--space-7);
+    background: var(--bg-alt);
+  }
+
+  .site-footer .inner {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .meta {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
+  .disclosure {
+    font-size: var(--text-xs);
+    color: var(--text-faint);
+    margin-bottom: 0;
+  }
+</style>

@@ -1,0 +1,158 @@
+---
+// Module page. Renders one curriculum module from the content
+// collection, with its sources block and prev/next navigation.
+import Shell from '../../layouts/Shell.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const modules = await getCollection('modules');
+  return modules.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const all = (await getCollection('modules')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const idx = all.findIndex((m) => m.data.slug === entry.data.slug);
+const prev = idx > 0 ? all[idx - 1] : null;
+const next = idx < all.length - 1 ? all[idx + 1] : null;
+const minutes = entry.data.words
+  ? Math.max(1, Math.round(entry.data.words / 230))
+  : null;
+---
+
+<Shell title={`${entry.data.title} · Tailscale Field Guide`} description={entry.data.description}>
+  <main id="main">
+    <header class="module-head">
+      <p class="eyebrow mono">
+        Module {String(entry.data.module).padStart(2, '0')}{minutes ? ` · ${minutes} min read` : ''}
+      </p>
+      <h1>{entry.data.title}</h1>
+      <p class="lede">{entry.data.description}</p>
+    </header>
+
+    <article class="prose">
+      <Content />
+    </article>
+
+    <section class="sources" aria-label="Sources">
+      <h2>Sources</h2>
+      <p>
+        Every factual claim in this module traces to one of these, checked on the
+        date shown. The full ledger lives at <a href="/sources">/sources</a>.
+      </p>
+      <ol>
+        {entry.data.sources.map((s) => (
+          <li>
+            <a href={s.url}>{s.title}</a>
+            <span class="mono checked">checked {s.checked}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <nav class="pager" aria-label="Module navigation">
+      {prev ? (
+        <a href={`/learn/${prev.data.slug}`}>
+          <span class="mono dir">Previous</span>
+          <span>{String(prev.data.module).padStart(2, '0')} {prev.data.title}</span>
+        </a>
+      ) : (
+        <span></span>
+      )}
+      {next ? (
+        <a class="next" href={`/learn/${next.data.slug}`}>
+          <span class="mono dir">Next</span>
+          <span>{String(next.data.module).padStart(2, '0')} {next.data.title}</span>
+        </a>
+      ) : (
+        <span></span>
+      )}
+    </nav>
+  </main>
+</Shell>
+
+<style>
+  main {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .module-head {
+    padding: var(--space-6) 0 var(--space-4);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: var(--space-5);
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+    max-width: 22ch;
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+    max-width: 58ch;
+  }
+
+  .sources {
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--line);
+  }
+
+  .sources h2 {
+    font-size: var(--text-xl);
+  }
+
+  .sources li {
+    margin-bottom: var(--space-2);
+  }
+
+  .checked {
+    color: var(--text-faint);
+    font-size: var(--text-xs);
+    margin-left: var(--space-2);
+  }
+
+  .pager {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin: var(--space-6) 0 var(--space-4);
+  }
+
+  .pager a {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    text-decoration: none;
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: var(--space-3) var(--space-4);
+    max-width: 44%;
+  }
+
+  .pager a:hover {
+    border-color: var(--accent);
+  }
+
+  .pager .dir {
+    color: var(--text-faint);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .pager .next {
+    text-align: right;
+    margin-left: auto;
+  }
+</style>

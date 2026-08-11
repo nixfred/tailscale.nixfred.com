@@ -59,6 +59,12 @@ jobs:
       - name: Canonical URL gate
         run: ./tests/check-canonical.sh
 
+      - name: Guardrail gate
+        run: ./tests/check-guardrail.sh
+
+      - name: Contrast gate
+        run: bun tests/check-contrast.mjs
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:

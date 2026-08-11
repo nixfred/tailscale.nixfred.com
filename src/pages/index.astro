@@ -1,49 +1,205 @@
 ---
-// FACTORY SCAFFOLD PAGE. Replaced by the real homepage in Stage 3.
-// Exists so the bootstrap has a page to build and deploy.
-import Base from '../layouts/Base.astro';
+// Homepage. Real content only: what exists is linked, what is coming
+// is described as authored roadmap prose with no links (Law 12).
+import Shell from '../layouts/Shell.astro';
+import { getCollection } from 'astro:content';
+
+const modules = (await getCollection('modules')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const totalWords = modules.reduce((n, m) => n + (m.data.words ?? 0), 0);
 ---
 
-<Base
-  title="tailscale.nixfred.com"
-  description="tailscale.nixfred.com is being prepared."
+<Shell
+  title="Tailscale Field Guide"
+  description="An unofficial Tailscale field guide and lab notebook: how the mesh actually works, feature by feature, packet by packet."
   surface="crisis"
 >
-  <main id="main" class="hold">
-    <p class="eyebrow">tailscale.nixfred.com</p>
-    <h1>Scaffold live.</h1>
-    <p class="lede">
-      Infrastructure is provisioned and serving this page. The site is
-      being manufactured.
-    </p>
-    <p class="mono status">STATUS: FACTORY BOOTSTRAP COMPLETE</p>
+  <main id="main">
+    <section class="hero">
+      <p class="eyebrow">Unofficial field guide and lab notebook</p>
+      <h1>How Tailscale actually works.</h1>
+      <p class="lede">
+        Mechanism first, marketing never. This site explains the mesh from the
+        WireGuard handshake up: the control plane, NAT traversal, DERP, MagicDNS,
+        ACLs, and what every CLI command really tells you. Every factual claim
+        traces to an official source with a checked date, and the lab material is
+        tested on a real tailnet before it is published.
+      </p>
+      <p class="mono status">
+        {modules.length} modules live · {totalWords.toLocaleString('en-US')} words · every claim sourced
+      </p>
+    </section>
+
+    <section class="band">
+      <h2>The curriculum</h2>
+      <p>
+        Numbered modules, meant to be read in order. Each one explains its layer
+        three ways (an analogy, the mechanism, the failure modes), shows what the
+        layer looks like on the wire, and ends with scenario questions that have
+        real answers.
+      </p>
+      <div class="cards">
+        {modules.map((m) => (
+          <a class="card" href={`/learn/${m.data.slug}`}>
+            <span class="mono num">{String(m.data.module).padStart(2, '0')}</span>
+            <span class="card-title">{m.data.title}</span>
+            <span class="card-desc">{m.data.description}</span>
+            <span class="mono card-meta">
+              {m.data.words ? `${Math.max(1, Math.round((m.data.words ?? 0) / 230))} min read` : 'reference'}
+            </span>
+          </a>
+        ))}
+      </div>
+      <p><a href="/learn">Full curriculum index, including what is still in the workshop.</a></p>
+    </section>
+
+    <section class="band">
+      <h2>What this site will grow into</h2>
+      <p>
+        Four tracks, publishing in deliberate order. Nothing here links until it
+        exists, and nothing ships as a stub.
+      </p>
+      <ol class="tracks">
+        <li>
+          <strong>Curriculum.</strong> The internals, live now above: orientation,
+          WireGuard, the control plane, NAT traversal, troubleshooting. Identity,
+          ACLs, DNS, routing, Serve and Funnel, the platform matrix, enterprise
+          operations, and a codebase tour follow in numbered order.
+        </li>
+        <li>
+          <strong>Feature encyclopedia.</strong> One reference page per feature and
+          a complete CLI tour, for the reader with 30 seconds and a specific
+          question.
+        </li>
+        <li>
+          <strong>Fieldcraft and drills.</strong> Evidence collection, reproduction
+          construction, engineering handoff packages, and written case study
+          drills: symptom, evidence, hypothesis tree, root cause.
+        </li>
+        <li>
+          <strong>Code lab.</strong> Guided reads of the open source Go codebase,
+          pprof exercises, and annotated packet captures.
+        </li>
+      </ol>
+    </section>
+
+    <section class="band">
+      <h2>How to read this site</h2>
+      <p>
+        Modules use five recurring callouts. They mark the paragraphs worth
+        slowing down for:
+      </p>
+      <aside class="callout callout-how" data-label="How it works">
+        <p>The mechanism under the surface, in enough depth to whiteboard it.</p>
+      </aside>
+      <aside class="callout callout-gotcha" data-label="Gotcha">
+        <p>Sharp edges, version quirks, and the mistakes everyone makes once.</p>
+      </aside>
+      <aside class="callout callout-wire" data-label="On the wire">
+        <p>What this looks like in packets, logs, and CLI output.</p>
+      </aside>
+      <aside class="callout callout-field" data-label="From the field">
+        <p>Operational judgment: when to use what, and when not to.</p>
+      </aside>
+      <aside class="callout callout-lab" data-label="Lab">
+        <p>Try it now, with exact commands and expected output.</p>
+      </aside>
+      <p>
+        Claims carry receipts. The <a href="/sources">sources ledger</a> lists
+        every reference with the date it was last checked against the official
+        documentation.
+      </p>
+    </section>
   </main>
+</Shell>
 
-  <style>
-    .hold {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      max-width: var(--page-max);
-      margin: 0 auto;
-      padding: var(--space-7) var(--space-4);
-    }
+<style>
+  main {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
 
-    h1 { font-size: var(--text-hero); }
+  .hero {
+    padding: var(--space-7) 0 var(--space-6);
+  }
 
-    .lede {
-      font-size: var(--text-lg);
-      color: var(--text-muted);
-      max-width: 52ch;
-    }
+  h1 {
+    font-size: var(--text-hero);
+    max-width: 16ch;
+  }
 
-    .status {
-      font-size: var(--text-sm);
-      color: var(--accent);
-      letter-spacing: 0.08em;
-      margin-top: var(--space-4);
-    }
-  </style>
-</Base>
+  .lede {
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+    max-width: 58ch;
+  }
+
+  .status {
+    font-size: var(--text-sm);
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+
+  .band {
+    padding: var(--space-6) 0 0;
+  }
+
+  .band h2 {
+    font-size: var(--text-2xl);
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--space-3);
+    margin: var(--space-4) 0;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .num {
+    color: var(--accent);
+    font-size: var(--text-sm);
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    line-height: 1.2;
+  }
+
+  .card-desc {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .card-meta {
+    color: var(--text-faint);
+    font-size: var(--text-xs);
+    margin-top: auto;
+  }
+
+  .tracks li {
+    margin-bottom: var(--space-3);
+    max-width: var(--measure);
+  }
+</style>
