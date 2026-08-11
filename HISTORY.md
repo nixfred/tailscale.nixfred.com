@@ -41,3 +41,22 @@ curriculum modules (00 to 03 plus troubleshooting) drafted and
 verified against official sources, then integrated.
 
 ---
+
+## Chapter 3: The curriculum completes
+### 2026-08-10
+
+Still the same day. Fred ordered graphics on every page, the official
+logo on the homepage, and a literal nixfred.com link home. The press
+kit came straight from Tailscale's own distribution channel, the hero
+grew a five node mesh diagram, /learn a curriculum map, /sources the
+citation hierarchy (DECISIONS 0007 and 0008).
+
+Then the second module wave landed: eight writers and eight verifiers,
+each writer against current official docs, each verifier repairing
+facts, style, and cross references against the canonical module table
+(the fix for wave one's renumbering pass, which worked: zero renumber
+edits needed this time). One guardrail catch: a courier analogy used a
+banned word metaphorically and was reworded. The curriculum now stands
+complete: thirteen modules, 00 through 12, roughly 56,000 words,
+124 ledger source entries, every page carrying token built SVG
+diagrams.

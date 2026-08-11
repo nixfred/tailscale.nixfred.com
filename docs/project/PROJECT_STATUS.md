@@ -6,9 +6,10 @@
 
 ## Current phase
 
-Phase 1 core SHIPPED 2026-08-10. Five modules live (00, 01, 02, 03, 11),
-design system settled, all six gates wired and green, fleet presence
-complete. Next: Phase 2, labs wave 1 (see docs/PRD.md).
+CURRICULUM COMPLETE 2026-08-10. All thirteen modules live (00 to 12),
+graphics on every page, official logo on the homepage (DECISIONS 0007),
+all six gates green. Next: fieldcraft spine plus drills, then labs
+wave 1 (labs need supervised tailnet time; see docs/PRD.md).
 
 ## Live URLs
 
