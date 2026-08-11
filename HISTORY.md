@@ -94,3 +94,47 @@ drawn: a curriculum rail on module pages, a coverage map with real per
 area counts on drill pages, and a track rail on guide pages. The rule
 recorded with them (DECISIONS 0009) is that no number inside any graphic
 on this site is ever typed by hand.
+
+---
+
+## Chapter 5: What the second pass found
+### 2026-08-10, later still
+
+Four fresh agents took the files whose verifiers had died and checked
+them against current official sources and, where it was faster, against
+the tailscale source tree itself. The pass was not cosmetic. It found:
+
+A fabricated root cause. The Docker drill explained a re-registering
+node by saying state landed in the container writable layer and died
+with the container. Containerboot actually starts the daemon with
+`--state=mem:` when no state directory is configured, so the state was
+never on disk at all. The drill had the right symptom and the wrong
+mechanism, which is the worst kind of wrong for a teaching page.
+
+A claim attributed to a page that does not contain it. One drill said
+the ping-types documentation describes TSMP as skipping the access
+control check. It does not; the string does not appear. The behavior is
+real, and the filter source states it plainly, so the claim survived
+with an honest citation instead of a borrowed one.
+
+Reversed arithmetic. In the birthday paradox section, the 256 sockets
+belong to the hard NAT side and the random probing to the easy side.
+The drill had them backwards.
+
+A packet filter aimed at the wrong byte. Peer relay traffic carries an
+eight byte Geneve header ahead of the WireGuard message, so the type
+byte a reader would filter on sits at offset 16, not 8. The same review
+compiled every tcpdump filter on the page and found several were IPv4
+only, which the generated BPF proves outright.
+
+Invented numbers wearing the clothes of measurements. A profile reading
+walked through percentages that had never been measured. They now say
+so, and the guide ends with the rule that produced the fix: never ship
+a number you did not read off a capture.
+
+Several log lines that no Tailscale binary emits, including one error
+string that belongs to headscale.
+
+None of this would have been caught by the gates, which check style and
+structure and cannot know whether a sentence is true. It is the argument
+for the verification pass existing at all.
