@@ -8,7 +8,7 @@ import { getCollection } from 'astro:content';
 const modules = (await getCollection('modules')).sort(
   (a, b) => a.data.order - b.data.order
 );
-const liveSlugs = new Set(modules.map((m) => m.data.slug));
+const liveNumbers = new Set(modules.map((m) => m.data.module));
 
 const planned = [
   { n: 4, title: 'Identity and auth', note: 'SSO, auth keys, tags, device identity, workload identity federation.' },
@@ -19,7 +19,7 @@ const planned = [
   { n: 9, title: 'The platform matrix', note: 'Linux, macOS, Windows, mobile, headless, containers, the Kubernetes operator.' },
   { n: 10, title: 'Enterprise operations', note: 'Logging and audit, SCIM, Tailnet Lock, device approval, operating at scale.' },
   { n: 12, title: 'The codebase', note: 'A guided tour of the open source repo: wgengine, magicsock, ipnlocal, derp, tsnet.' },
-].filter((p) => !liveSlugs.has(String(p.n)));
+].filter((p) => !liveNumbers.has(p.n));
 ---
 
 <Shell
@@ -99,24 +99,26 @@ const planned = [
       </ol>
     </section>
 
-    <section aria-label="In the workshop">
-      <h2>In the workshop</h2>
-      <p>
-        Written next, in this order. These are titles and scope, not links:
-        a module appears above only when it is real.
-      </p>
-      <ol class="planned">
-        {planned.map((p) => (
-          <li>
-            <span class="mono num">{String(p.n).padStart(2, '0')}</span>
-            <span class="body">
-              <span class="title">{p.title}</span>
-              <span class="desc">{p.note}</span>
-            </span>
-          </li>
-        ))}
-      </ol>
-    </section>
+    {planned.length > 0 && (
+      <section aria-label="In the workshop">
+        <h2>In the workshop</h2>
+        <p>
+          Written next, in this order. These are titles and scope, not links:
+          a module appears above only when it is real.
+        </p>
+        <ol class="planned">
+          {planned.map((p) => (
+            <li>
+              <span class="mono num">{String(p.n).padStart(2, '0')}</span>
+              <span class="body">
+                <span class="title">{p.title}</span>
+                <span class="desc">{p.note}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )}
   </main>
 </Shell>
 
