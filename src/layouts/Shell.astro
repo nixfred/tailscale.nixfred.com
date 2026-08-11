@@ -16,6 +16,9 @@ const version = buildVersion();
 const path = Astro.url.pathname.replace(/\.html$/, '');
 const nav = [
   { href: '/learn', label: 'Learn' },
+  { href: '/drills', label: 'Drills' },
+  { href: '/fieldcraft', label: 'Fieldcraft' },
+  { href: '/code-lab', label: 'Code lab' },
   { href: '/sources', label: 'Sources' },
 ];
 ---
@@ -65,7 +68,7 @@ const nav = [
     position: sticky;
     top: 0;
     z-index: 10;
-    height: var(--header-h);
+    min-height: var(--header-h);
     background: color-mix(in srgb, var(--bg) 88%, transparent);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
@@ -74,12 +77,13 @@ const nav = [
   .site-header .inner {
     max-width: var(--page-max);
     margin: 0 auto;
-    height: 100%;
-    padding: 0 var(--space-4);
+    min-height: var(--header-h);
+    padding: var(--space-2) var(--space-4);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-3);
+    gap: var(--space-2);
+    flex-wrap: wrap;
   }
 
   .brand {
@@ -100,7 +104,8 @@ const nav = [
 
   nav {
     display: flex;
-    gap: var(--space-3);
+    gap: var(--space-2);
+    flex-wrap: wrap;
   }
 
   nav a {
@@ -108,7 +113,8 @@ const nav = [
     text-decoration: none;
     font-size: var(--text-sm);
     font-weight: 600;
-    padding: var(--space-2);
+    padding: var(--space-2) var(--space-1);
+    white-space: nowrap;
   }
 
   nav a:hover,

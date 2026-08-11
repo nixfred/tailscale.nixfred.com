@@ -26,6 +26,8 @@ After the foundation, modules 00 through 03 plus the troubleshooting module come
 
 Title: Tailscale Field Guide. The vendor name appears nominatively only (qumulo.nixfred.com precedent), no logo or visual identity imitation, one unofficial disclosure line in the global footer.
 
+PARTIALLY SUPERSEDED by 0007 on the same day: the no logo clause no longer holds. The official wordmark renders on the homepage by Fred's ruling. Every other clause here stands.
+
 ## 0007, 2026-08-10, Fred: the official Tailscale logo appears on the homepage
 
 Fred's direct instruction. The official white wordmark from Tailscale's own press kit (self hosted at public/brand/) renders in the homepage hero, captioned as the subject of the guide with ownership attribution. This amends DECISIONS 0006: the palette and visual identity separation still hold everywhere else; the logo appears nominatively on the main page only. The press kit is Tailscale's published brand distribution channel.
@@ -33,3 +35,11 @@ Fred's direct instruction. The official white wordmark from Tailscale's own pres
 ## 0008, 2026-08-10, Fred: every page carries graphics; nixfred.com link is literal
 
 Two standing rules from Fred. One: every page on this site carries at least one custom SVG graphic built from tokens (modules carry two or more). Two: the footer link home renders the literal text nixfred.com sitewide, in addition to the byline.
+
+## 0009, 2026-08-10: navigation diagrams are data driven, never hand maintained
+
+Every content page carries a diagram generated from the content collections themselves: a curriculum rail on module pages, a coverage map with real per area counts on drill pages, a track rail on guide pages. Rationale: a hand maintained "you are here" graphic drifts the moment content changes and then lies to the reader. Generated ones cannot. The same rule governs the counts on the homepage, the drills index, and the sources ledger chart: if a number appears in a graphic, it is computed at build time from the content, never typed.
+
+## 0010, 2026-08-10: the fieldcraft, drills, and code lab tracks ship
+
+Fifteen drills across six failure areas, four fieldcraft guides, and four code lab guides. Drills follow a fixed section order (ticket, evidence, hypothesis tree, investigation, root cause, fix and prevention, handoff package, the trap) so the format itself teaches the method. Two drills are derived from incidents on the author's own tailnet, published with generic hostnames per site rule 2.

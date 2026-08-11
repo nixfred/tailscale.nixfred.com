@@ -107,6 +107,7 @@ What the OS decides is everything at the edges:
 
 The failure mode of forgetting this: you assume a symptom is a Tailscale bug when it is actually a hull problem. If two peers on different platforms both show the same handshake behavior, the engine is fine and your problem is above or below it. If only the Synology box misbehaves, suspect the hull.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 340" role="img" aria-label="Layer diagram showing the identical Tailscale engine above five different OS integration layers">
   <title>The shared engine versus the OS-decided layer</title>
   <rect x="20" y="20" width="720" height="110" rx="10" fill="var(--diagram-bg)" stroke="var(--diagram-accent)" stroke-width="2"/>
@@ -145,6 +146,7 @@ The failure mode of forgetting this: you assume a symptom is a Tailscale bug whe
   <text x="680" y="250" text-anchor="middle" fill="var(--diagram-text)" font-size="11">TS_ env vars</text>
   <text x="680" y="270" text-anchor="middle" fill="var(--diagram-text)" font-size="11">state volume</text>
 </svg>
+</div>
 
 ### Linux: the reference platform
 
@@ -182,6 +184,7 @@ Failure mode: mixing variants. Two variants installed at once fight over the VPN
 
 > [!GOTCHA] Do not install more than one macOS variant simultaneously, and identify the variant before debugging anything. A missing feature (no Tailscale SSH on either GUI variant, a Screen Time conflict on the App Store one) may be a variant property, not a bug. `tailscale version` output and the presence or absence of a `tailscaled` process tell you which body the engine is wearing.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 320" role="img" aria-label="Decision tree for choosing and identifying macOS Tailscale variants">
   <title>macOS variant decision tree</title>
   <rect x="270" y="15" width="220" height="50" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-accent)" stroke-width="2"/>
@@ -213,6 +216,7 @@ Failure mode: mixing variants. Two variants installed at once fight over the VPN
   <text x="640" y="277" text-anchor="middle" fill="var(--diagram-text)" font-size="11">no SSH server, Screen Time</text>
   <text x="640" y="293" text-anchor="middle" fill="var(--diagram-text)" font-size="11">filter can conflict</text>
 </svg>
+</div>
 
 ### Windows: a service wearing a tray icon
 
@@ -262,6 +266,7 @@ Failure modes: the classic three. No state volume, so every deploy mints a dupli
 
 > [!GOTCHA] `TS_USERSPACE=true` is the default. Userspace mode works everywhere but does not create a TUN device, so anything that assumes kernel routing, including `TS_TAILNET_TARGET_IP` egress, will not work. Flip to kernel mode deliberately: `TS_USERSPACE=false`, device `/dev/net/tun`, and `NET_ADMIN` capability, and expect a fast failure in the logs if one of the three is missing.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 300" role="img" aria-label="Docker sidecar topology: app container sharing the network namespace of a Tailscale container that connects to the tailnet">
   <title>Sidecar pattern in Docker</title>
   <rect x="20" y="30" width="420" height="240" rx="12" fill="var(--diagram-bg)" stroke="var(--diagram-line)" stroke-dasharray="6 4"/>
@@ -288,6 +293,7 @@ Failure modes: the classic three. No state volume, so every deploy mints a dupli
   <line x1="410" y1="145" x2="540" y2="145" stroke="var(--diagram-accent)" stroke-width="2"/>
   <text x="475" y="135" text-anchor="middle" fill="var(--diagram-text)" font-size="10">WireGuard</text>
 </svg>
+</div>
 
 ### Kubernetes: the operator builds proxies for you
 

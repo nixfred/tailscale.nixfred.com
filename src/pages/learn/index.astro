@@ -36,7 +36,8 @@ const planned = [
         scenario questions that have real answers. Modules publish in numbered
         order; the list below shows exactly what exists today.
       </p>
-      <svg
+      <div class="diagram-wrap">
+<svg
         class="map"
         viewBox="0 0 760 250"
         role="img"
@@ -77,6 +78,48 @@ const planned = [
         </g>
         <text x="90" y="248" fill="var(--diagram-text)" font-size="12" font-family="var(--font-mono)">00 orientation opens the map. Read the rows left to right.</text>
       </svg>
+</div>
+
+      <div class="diagram-wrap">
+<svg
+        class="map paths"
+        viewBox="0 0 760 250"
+        role="img"
+        aria-label="Three ways to read the curriculum: straight through in order, symptom first starting at troubleshooting, or feature first jumping to the owning module"
+      >
+        <title>Three reading paths through the same thirteen modules</title>
+        {[
+          {
+            y: 16,
+            name: 'straight through',
+            when: 'you want the whole system',
+            route: '00 to 12 in order',
+          },
+          {
+            y: 92,
+            name: 'symptom first',
+            when: 'something is broken now',
+            route: '11 troubleshooting, then 03, 06, or 07',
+          },
+          {
+            y: 168,
+            name: 'feature first',
+            when: 'you need one answer',
+            route: 'jump to the module that owns the feature',
+          },
+        ].map((p, i) => (
+          <g>
+            <rect x="20" y={p.y} width="200" height="60" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-accent)" stroke-width="1.5" />
+            <text x="36" y={p.y + 26} font-size="13" font-family="var(--font-mono)" fill="var(--diagram-accent)">{p.name}</text>
+            <text x="36" y={p.y + 46} font-size="11" font-family="var(--font-mono)" fill="var(--diagram-text)" opacity="0.8">{p.when}</text>
+            <line x1="220" y1={p.y + 30} x2="270" y2={p.y + 30} stroke="var(--diagram-line)" stroke-width="1.5" />
+            <rect x="270" y={p.y} width="470" height="60" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-line)" stroke-width="1.5" />
+            <text x="288" y={p.y + 36} font-size="13" font-family="var(--font-mono)" fill="var(--diagram-text)">{p.route}</text>
+          </g>
+        ))}
+        <text x="20" y="242" font-size="11" font-family="var(--font-mono)" fill="var(--diagram-text)" opacity="0.7">every module cross references the others, so no path is a dead end</text>
+      </svg>
+</div>
     </header>
 
     <section aria-label="Live modules">
@@ -141,6 +184,10 @@ const planned = [
     font-size: var(--text-lg);
     color: var(--text-muted);
     max-width: 58ch;
+  }
+
+  .paths {
+    margin-top: var(--space-3);
   }
 
   .map {

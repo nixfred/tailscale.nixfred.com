@@ -81,6 +81,7 @@ The failure mode: five links in that chain, and each one fails silently from the
 
 > [!HOW-IT-WORKS] A subnet route never exists "in the network." It exists as a line in the netmaps the control plane pushes to each peer, and as a widened allowed-IPs entry on the router's WireGuard key. There is no routing protocol to converge and no advertisement to expire. If the netmap says the route is there, it is there, even if the router is on fire.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 300" role="img" aria-label="Subnet route lifecycle from advertisement through approval to netmap propagation">
   <title>Subnet route lifecycle: advertise, approve, propagate, accept</title>
   <rect x="20" y="110" width="150" height="70" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-line)"/>
@@ -103,6 +104,7 @@ The failure mode: five links in that chain, and each one fails silently from the
   <line x1="430" y1="230" x2="560" y2="165" stroke="var(--diagram-accent)"/>
   <text x="470" y="185" fill="var(--diagram-text)" font-size="11">3. approved: propagate</text>
 </svg>
+</div>
 
 ### The advertised vs approved gap
 
@@ -167,6 +169,7 @@ Two operational riders:
 
 The failure mode: HA that was never tested. Two routers, both approved, primary dies, and traffic fails anyway because the standby's IP forwarding sysctl was never set, or its routes were advertised but a rebuild left them unapproved. The control plane will cheerfully promote a router that cannot forward. Failover drills are not optional.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 270" role="img" aria-label="High availability failover state flow for two subnet routers advertising the same prefix">
   <title>HA subnet router failover: control plane promotes standby when primary goes offline</title>
   <rect x="30" y="30" width="190" height="64" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-accent)"/>
@@ -189,6 +192,7 @@ The failure mode: HA that was never tested. Two routers, both approved, primary 
   <text x="520" y="122" text-anchor="middle" fill="var(--diagram-text)" font-size="11">netmap update</text>
   <text x="390" y="250" text-anchor="middle" fill="var(--diagram-text)" font-size="11">graceful down: up to ~15s; partition: longer</text>
 </svg>
+</div>
 
 ### SNAT and netfilter modes on Linux routers
 
@@ -257,6 +261,7 @@ Each site's router advertises its own 4via6 prefix instead of the raw IPv4 route
 
 The failure mode: forgetting that the admin console shows the raw IPv6 routes, not the IPv4 networks they encode. An operator auditing routes sees `fd7a:...:a01:100/120`, does not recognize it, and deletes or fails to approve it. Label your routers well, and keep a site ID registry in your infrastructure docs, because site ID collisions between two routers create exactly the ambiguity 4via6 exists to remove.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 300" role="img" aria-label="4via6 mapping of two overlapping IPv4 sites to distinct IPv6 prefixes">
   <title>4via6: identical 10.1.1.0/24 sites become distinct IPv6 routes via site IDs</title>
   <rect x="20" y="30" width="200" height="70" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-line)"/>
@@ -281,6 +286,7 @@ The failure mode: forgetting that the admin console shows the raw IPv6 routes, n
   <line x1="570" y1="65" x2="620" y2="130" stroke="var(--diagram-line)"/>
   <line x1="570" y1="225" x2="620" y2="160" stroke="var(--diagram-line)"/>
 </svg>
+</div>
 
 ### App connectors: pinning SaaS egress by name
 

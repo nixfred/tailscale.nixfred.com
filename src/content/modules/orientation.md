@@ -153,6 +153,7 @@ The practical takeaway for the mental model: the code that holds your private ke
 
 Everything above compresses into a single picture: two planes, different topologies, different jobs.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 360" role="img" aria-label="Comparison of hub and spoke VPN topology with Tailscale's split control plane and mesh data plane">
   <title>Hub and spoke VPN versus Tailscale's two-plane design</title>
   <text x="150" y="28" text-anchor="middle" fill="var(--diagram-text)" font-size="15" font-weight="bold">Traditional VPN</text>
@@ -194,9 +195,11 @@ Everything above compresses into a single picture: two planes, different topolog
   <line x1="602" y1="94" x2="478" y2="260" stroke="var(--diagram-line)" stroke-width="2"/>
   <text x="540" y="330" text-anchor="middle" fill="var(--diagram-text)" font-size="11">dashed: keys and policy only. solid: WireGuard traffic, direct</text>
 </svg>
+</div>
 
 And the lifecycle of a node joining, as a sequence, because the order of operations explains most first-day confusion:
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 720 300" role="img" aria-label="Sequence of a node joining a tailnet: login, key upload, netmap download, direct WireGuard connection">
   <title>Node join sequence: control plane first, then data plane</title>
   <line x1="110" y1="55" x2="110" y2="270" stroke="var(--diagram-line)"/>
@@ -219,6 +222,7 @@ And the lifecycle of a node joining, as a sequence, because the order of operati
   <text x="360" y="208" text-anchor="middle" fill="var(--diagram-text)" font-size="11">4. direct WireGuard tunnel, end to end encrypted</text>
   <text x="360" y="250" text-anchor="middle" fill="var(--diagram-text)" font-size="11">private keys never traverse steps 1 to 3</text>
 </svg>
+</div>
 
 ## On the wire
 

@@ -1,0 +1,181 @@
+---
+// Code lab index: reading the source, profiles, and packets.
+import Shell from '../../layouts/Shell.astro';
+import { getCollection } from 'astro:content';
+
+const guides = (await getCollection('guides'))
+  .filter((g) => g.data.track === 'code-lab')
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Shell
+  title="Code lab · Tailscale Field Guide"
+  description="Reading the open source Tailscale codebase, Go profiles, and packet captures as investigation tools."
+>
+  <main id="main">
+    <header class="page-head">
+      <p class="eyebrow">Source level</p>
+      <h1>Code lab: read the source, the profile, the packet.</h1>
+      <p class="lede">
+        The deepest evidence tier. When the docs run out, the open source
+        codebase, a pprof profile, or a packet capture answers the question.
+        These guides teach each one as an investigation tool for an engineer who
+        operates systems, not someone who writes Go all day.
+      </p>
+      <div class="diagram-wrap">
+<svg
+        class="descent"
+        viewBox="0 0 760 160"
+        role="img"
+        aria-label="The evidence descent: a log line seen in the field leads to a grep in the source, to the owning package, to the mechanism"
+      >
+        <title>From a field observation down to the mechanism</title>
+        {[
+          { x: 16, label: 'log line', sub: 'seen in the field' },
+          { x: 208, label: 'grep the repo', sub: 'find its source' },
+          { x: 400, label: 'owning package', sub: 'magicsock, ipnlocal' },
+          { x: 592, label: 'mechanism', sub: 'now you KNOW' },
+        ].map((s, i) => (
+          <g>
+            <rect x={s.x} y="40" width="152" height="56" rx="8" fill="var(--diagram-bg)" stroke={i === 3 ? 'var(--diagram-accent)' : 'var(--diagram-line)'} stroke-width={i === 3 ? '2' : '1.5'} />
+            <text x={s.x + 76} y="63" text-anchor="middle" fill="var(--diagram-text)" font-size="13" font-family="var(--font-mono)">{s.label}</text>
+            <text x={s.x + 76} y="83" text-anchor="middle" fill="var(--diagram-text)" font-size="10" font-family="var(--font-mono)" opacity="0.7">{s.sub}</text>
+          </g>
+        ))}
+        <g stroke="var(--diagram-accent)" stroke-width="2" fill="none">
+          <path d="M168 68 L208 68 M360 68 L400 68 M552 68 L592 68" />
+        </g>
+        <text x="16" y="136" fill="var(--diagram-text)" font-size="12" font-family="var(--font-mono)">profiles and packet captures follow the same descent: observation, tool, mechanism</text>
+      </svg>
+</div>
+
+      <div class="diagram-wrap">
+<svg
+        class="descent matrix"
+        viewBox="0 0 760 290"
+        role="img"
+        aria-label="Which tool answers which question: read the source for why behavior exists, take a profile for where time or memory goes, capture packets for what actually left the machine"
+      >
+        <title>Picking the right instrument for the question</title>
+        {[
+          { t: 'read the source', q: 'Why does it behave this way at all?', ex: 'path selection, state machines, defaults' },
+          { t: 'take a profile', q: 'Where is the CPU or the memory going?', ex: 'high load, growth over time, stuck goroutines' },
+          { t: 'capture packets', q: 'What actually left and arrived?', ex: 'handshakes, probes, relay versus direct' },
+        ].map((row, i) => {
+          const y = 16 + i * 88;
+          return (
+            <g>
+              <rect x="20" y={y} width="200" height="68" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-accent)" stroke-width="2" />
+              <text x="38" y={y + 40} font-size="13" font-family="var(--font-mono)" fill="var(--diagram-accent)">{row.t}</text>
+              <line x1="220" y1={y + 34} x2="270" y2={y + 34} stroke="var(--diagram-line)" stroke-width="1.5" />
+              <rect x="270" y={y} width="470" height="68" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-line)" stroke-width="1.5" />
+              <text x="288" y={y + 30} font-size="13" font-family="var(--font-mono)" fill="var(--diagram-text)">{row.q}</text>
+              <text x="288" y={y + 52} font-size="11" font-family="var(--font-mono)" fill="var(--diagram-text)" opacity="0.75">{row.ex}</text>
+            </g>
+          );
+        })}
+        <text x="20" y="282" font-size="11" font-family="var(--font-mono)" fill="var(--diagram-text)" opacity="0.7">using the wrong instrument produces confident nonsense, so pick by the question</text>
+      </svg>
+</div>
+    </header>
+
+    <ol class="guide-list">
+      {guides.map((g) => (
+        <li>
+          <a class="row" href={`/code-lab/${g.data.slug}`}>
+            <span class="mono num">{String(g.data.order).padStart(2, '0')}</span>
+            <span class="body">
+              <span class="title">{g.data.title}</span>
+              <span class="desc">{g.data.description}</span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </main>
+</Shell>
+
+<style>
+  main {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .page-head {
+    padding: var(--space-6) 0 var(--space-4);
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+    max-width: 24ch;
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+    max-width: 60ch;
+  }
+
+  .matrix {
+    margin-top: var(--space-3);
+  }
+
+  .descent {
+    width: 100%;
+    max-width: 800px;
+    margin-top: var(--space-4);
+    background: var(--diagram-bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+  }
+
+  .guide-list {
+    list-style: none;
+    margin: var(--space-4) 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .row {
+    display: flex;
+    gap: var(--space-3);
+    align-items: baseline;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    background: var(--card-bg);
+    transition: border-color var(--dur-fast) var(--ease-out);
+  }
+
+  .row:hover {
+    border-color: var(--accent);
+  }
+
+  .num {
+    color: var(--accent);
+    font-size: var(--text-sm);
+    flex-shrink: 0;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+
+  .desc {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+</style>

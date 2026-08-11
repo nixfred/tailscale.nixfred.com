@@ -51,17 +51,19 @@ Plus labs (`/labs/`): at least 10 exercises actually executed on the author's ow
 
 1. This is a product field guide and lab notebook only. No recruiting, hiring, candidate, or career framing anywhere: copy, metadata, routes, image text, alt text, structured data, commit messages. <!-- guardrail:allow -->
 2. Tailnet privacy: published lab material uses generic hostnames (node-a, lab-vm-1), no real IPs beyond documentation ranges, no keys, no policy files copied verbatim from a real tailnet. Sanitization happens before commit, not before deploy.
-3. Brand separation: no use of Tailscale's logo or visual identity. The name appears only nominatively. One disclosure line in the global footer: unofficial, not affiliated with or endorsed by Tailscale Inc.
+3. Brand separation: the site design does not imitate Tailscale's visual identity, and the name appears nominatively. One disclosure line in the global footer: unofficial, not affiliated with or endorsed by Tailscale Inc. AMENDED by Fred's ruling of 2026-08-10 (DECISIONS 0007): the official wordmark from Tailscale's own press kit renders in the homepage hero, self hosted, captioned with ownership attribution.
 4. These rules are enforced by `tests/check-guardrail.sh` in addition to the seed gates, proven with known bad input before first use.
 
 ## Acceptance criteria (current release: Phase 0 foundation plus Phase 1 core)
 
 1. Phase 0: the deployed homepage at https://tailscale.nixfred.com renders real authored content at 390, 820, and 1440 pixel widths with no horizontal overflow, a footer with the nixfred.com link, repo link, version identifier, and the single disclosure line, and all four seed gates plus the guardrail gate pass.
 2. Phase 1: modules 00 through 03 plus the troubleshooting module published at full depth, each with at least 2 inline SVG diagrams, every factual claim resolving to a sources entry, and the module index linking only to modules that exist.
-3. Later phases (labs, fieldcraft, encyclopedia completion, code lab) are DEFERRED and enter through Stage 0 review of this contract's affected sections.
+3. Fieldcraft, drills, and code lab: SHIPPED 2026-08-10. Fifteen drills spanning all six failure areas, each ending in a filled handoff package; four fieldcraft guides; four code lab guides.
+4. Every page carries at least two custom SVG graphics, and any number shown inside a graphic is computed from the content collections at build time.
+5. Remaining DEFERRED work: the feature encyclopedia with its CLI tour, and the on tailnet lab exercises. Both enter through Stage 0 review of this contract's affected sections.
 
 ## Deferred
 
-1. Feature encyclopedia completion and CLI tour: Phase 5.
-2. Labs waves, drills, code lab: Phases 2, 3, 6.
-3. OG artwork beyond the seed default: Phase 7 polish.
+1. Feature encyclopedia and CLI tour: one reference page per feature, enumerated against the official docs sitemap and changelog.
+2. On tailnet lab exercises: these deliberately break a working network (blocking UDP, forcing relay paths, injecting DNS failures), so they are run under supervision rather than autonomously, then published sanitized.
+3. Favicon raster fallbacks derived from the SVG mark.

@@ -1,0 +1,106 @@
+---
+// One drill: the worked case study.
+import Shell from '../../layouts/Shell.astro';
+import { getCollection, render } from 'astro:content';
+import { dots } from '../../lib/dots';
+import AreaMap from '../../components/AreaMap.astro';
+
+export async function getStaticPaths() {
+  const drills = await getCollection('drills');
+  return drills.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const AREAS = ['connectivity', 'identity', 'policy', 'dns', 'routing', 'platform'];
+const allDrills = await getCollection('drills');
+const counts = AREAS.map((a) => ({
+  area: a,
+  n: allDrills.filter((d) => d.data.area === a).length,
+})).filter((c) => c.n > 0);
+const minutes = entry.data.words
+  ? Math.max(1, Math.round(entry.data.words / 230))
+  : null;
+---
+
+<Shell title={`${entry.data.title} · Drills · Tailscale Field Guide`} description={entry.data.description}>
+  <main id="main">
+    <header class="drill-head">
+      <p class="eyebrow mono">
+        Drill · {entry.data.area} · difficulty {dots(entry.data.difficulty)}{minutes ? ` · ${minutes} min` : ''}
+      </p>
+      <h1>{entry.data.title}</h1>
+      <p class="symptom mono">"{entry.data.symptom}"</p>
+    </header>
+
+    <AreaMap counts={counts} current={entry.data.area} />
+
+    <article class="prose">
+      <Content />
+    </article>
+
+    <section class="sources" aria-label="Sources">
+      <h2>Sources</h2>
+      <ol>
+        {entry.data.sources.map((s) => (
+          <li>
+            <a href={s.url}>{s.title}</a>
+            <span class="mono checked">checked {s.checked}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <p class="back"><a href="/drills">All drills</a></p>
+  </main>
+</Shell>
+
+<style>
+  main {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .drill-head {
+    padding: var(--space-6) 0 var(--space-4);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: var(--space-5);
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+    max-width: 24ch;
+  }
+
+  .symptom {
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+    font-style: italic;
+    max-width: 58ch;
+  }
+
+  .sources {
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--line);
+  }
+
+  .sources h2 {
+    font-size: var(--text-xl);
+  }
+
+  .checked {
+    color: var(--text-faint);
+    font-size: var(--text-xs);
+    margin-left: var(--space-2);
+  }
+
+  .back {
+    margin: var(--space-5) 0;
+  }
+</style>

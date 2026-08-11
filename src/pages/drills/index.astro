@@ -1,0 +1,181 @@
+---
+// Drills index: written case studies, grouped by area, difficulty dots.
+import Shell from '../../layouts/Shell.astro';
+import { getCollection } from 'astro:content';
+import { dots } from '../../lib/dots';
+import AreaMap from '../../components/AreaMap.astro';
+
+const drills = await getCollection('drills');
+const AREAS = ['connectivity', 'identity', 'policy', 'dns', 'routing', 'platform'] as const;
+const counts = AREAS.map((a) => ({
+  area: a,
+  n: drills.filter((d) => d.data.area === a).length,
+})).filter((c) => c.n > 0);
+const byArea = AREAS.map((a) => ({
+  area: a,
+  items: drills
+    .filter((d) => d.data.area === a)
+    .sort((x, y) => x.data.difficulty - y.data.difficulty || x.data.slug.localeCompare(y.data.slug)),
+})).filter((g) => g.items.length > 0);
+---
+
+<Shell
+  title="Drills · Tailscale Field Guide"
+  description="Written troubleshooting case studies: symptom, evidence, hypothesis tree, investigation, root cause, and the engineering handoff package."
+>
+  <main id="main">
+    <header class="page-head">
+      <p class="eyebrow">Case studies</p>
+      <h1>Drills: work the ticket.</h1>
+      <p class="lede">
+        Each drill is a realistic escalation worked end to end: the ticket as it
+        arrives, the evidence, a hypothesis tree, an investigation where every
+        step rules something out, the root cause, and the handoff package an
+        engineering team could act on without follow up questions. Read them
+        actively: decide your next command before reading the next step.
+      </p>
+      <div class="diagram-wrap">
+<svg
+        class="loop"
+        viewBox="0 0 760 170"
+        role="img"
+        aria-label="The investigation loop: symptom to evidence to hypotheses to a discriminating test, looping until one hypothesis survives as root cause"
+      >
+        <title>The investigation loop every drill follows</title>
+        {[
+          { x: 20, label: 'symptom' },
+          { x: 170, label: 'evidence' },
+          { x: 320, label: 'hypotheses' },
+          { x: 470, label: 'test' },
+          { x: 620, label: 'root cause' },
+        ].map((s) => (
+          <g>
+            <rect x={s.x} y="55" width="120" height="44" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-line)" stroke-width="1.5" />
+            <text x={s.x + 60} y="82" text-anchor="middle" fill="var(--diagram-text)" font-size="13" font-family="var(--font-mono)">{s.label}</text>
+          </g>
+        ))}
+        <g stroke="var(--diagram-accent)" stroke-width="2" fill="none">
+          <path d="M140 77 L170 77 M290 77 L320 77 M440 77 L470 77 M590 77 L620 77" />
+        </g>
+        <path d="M530 55 C 520 20, 390 20, 380 52" stroke="var(--diagram-line)" stroke-width="1.5" fill="none" stroke-dasharray="5 5" />
+        <text x="455" y="26" text-anchor="middle" fill="var(--diagram-text)" font-size="11" font-family="var(--font-mono)">test kills a branch: loop</text>
+        <text x="80" y="135" fill="var(--diagram-text)" font-size="12" font-family="var(--font-mono)">every ruled out branch is progress; the last branch standing is the root cause</text>
+      </svg>
+</div>
+      <AreaMap counts={counts} />
+    </header>
+
+    {byArea.map((g) => (
+      <section aria-label={g.area}>
+        <h2 class="area">{g.area}</h2>
+        <ol class="drill-list">
+          {g.items.map((d) => (
+            <li>
+              <a class="row" href={`/drills/${d.data.slug}`}>
+                <span class="body">
+                  <span class="title">{d.data.title}</span>
+                  <span class="desc">"{d.data.symptom}"</span>
+                </span>
+                <span class="mono dots" aria-label={`difficulty ${d.data.difficulty} of 3`}>
+                  {dots(d.data.difficulty)}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))}
+  </main>
+</Shell>
+
+<style>
+  main {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .page-head {
+    padding: var(--space-6) 0 var(--space-4);
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+    max-width: 60ch;
+  }
+
+  .loop {
+    width: 100%;
+    max-width: 800px;
+    margin-top: var(--space-4);
+    background: var(--diagram-bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+  }
+
+  .area {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-top: var(--space-5);
+  }
+
+  .drill-list {
+    list-style: none;
+    margin: var(--space-3) 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .row {
+    display: flex;
+    gap: var(--space-3);
+    align-items: baseline;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    background: var(--card-bg);
+    transition: border-color var(--dur-fast) var(--ease-out);
+  }
+
+  .row:hover {
+    border-color: var(--accent);
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+
+  .desc {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    font-style: italic;
+  }
+
+  .dots {
+    margin-left: auto;
+    color: var(--accent);
+    font-size: var(--text-sm);
+    flex-shrink: 0;
+    letter-spacing: 0.2em;
+  }
+</style>

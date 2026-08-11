@@ -151,6 +151,7 @@ Mechanism: for network access, grants can do everything ACLs can, and the two sy
 
 Failure mode: writing a grant with an `app` field but no `ip` field and expecting network access. App capabilities do not open ports. If nothing grants the `ip` layer (this grant, another grant, or a legacy ACL), the TCP connection never establishes and the beautifully scoped capability payload never gets consulted.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 740 260" role="img" aria-label="Layered gate model of a grant: posture check, then netmap inclusion, then the ip packet filter, then app capability enforcement by the application">
   <title>The layers a connection passes through under a grant</title>
   <rect x="20" y="90" width="150" height="70" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-line)"/>
@@ -172,6 +173,7 @@ Failure mode: writing a grant with an `app` field but no `ip` field and expectin
   <text x="655" y="50" text-anchor="middle" fill="var(--diagram-text)" font-size="12">enforced by the app itself</text>
   <text x="370" y="220" text-anchor="middle" fill="var(--diagram-text)" font-size="12">fail any layer on the left and the layers to the right are never consulted</text>
 </svg>
+</div>
 
 ### Autogroups: the built-in nouns
 
@@ -244,6 +246,7 @@ Two structural constraints follow from tags being identity. First, a tagged devi
 
 There is a second, quieter trap in the same rule. `autogroup:self` is doing double duty in the default: it restricts destinations and it implicitly scopes `users`, because on your own machine, being any nonroot user is fine. The docs warn that if you widen `dst` from `autogroup:self` to something like a tag, you should also reconsider `autogroup:nonroot` in `users` in the same breath: leaving it in place means anyone permitted by `src` can SSH in as any nonroot account on shared servers, which is a privilege grant nobody consciously made.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 720 300" role="img" aria-label="State flow showing how tagging a node breaks SSH rules scoped to autogroup:self and the paired rule that fixes it">
   <title>The autogroup:self tagging lockout and its fix</title>
   <rect x="20" y="40" width="200" height="90" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-line)"/>
@@ -268,6 +271,7 @@ There is a second, quieter trap in the same rule. `autogroup:self` is doing doub
   <line x1="610" y1="130" x2="200" y2="190" stroke="var(--diagram-line)"/>
   <line x1="610" y1="130" x2="540" y2="190" stroke="var(--diagram-accent)"/>
 </svg>
+</div>
 
 ### Posture: rules that check the device, not just the identity
 
@@ -329,6 +333,7 @@ Enforcement then happens at the destination. Each device enforces incoming conne
 
 > [!HOW-IT-WORKS] Control also prunes what each node can even see. The coordination server gives each node the public keys of only the nodes that are supposed to connect to it, so if policy permits no traffic at all between two nodes, each is simply omitted from the other's netmap. No WireGuard key exchange, no endpoint discovery, no encrypted path is ever set up between them. Deny by omission is not a dropped packet; for fully disallowed pairs it is a peer that, from the node's perspective, does not exist.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 740 320" role="img" aria-label="Sequence showing a policy edit flowing through tests and compilation to per-node packet filters enforced at the destination">
   <title>Policy distribution: edit, test gate, compile, push, enforce</title>
   <rect x="20" y="30" width="150" height="60" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-line)"/>
@@ -355,6 +360,7 @@ Enforcement then happens at the destination. Each device enforces incoming conne
   <text x="380" y="230" text-anchor="middle" fill="var(--diagram-text)" font-size="12">WireGuard</text>
   <text x="380" y="305" text-anchor="middle" fill="var(--diagram-text)" font-size="12">packet from a is judged by b's local filter, not by any middlebox</text>
 </svg>
+</div>
 
 ## On the wire
 

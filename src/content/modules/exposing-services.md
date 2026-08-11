@@ -117,6 +117,7 @@ Bytes in, bytes out, no HTTP parsing, no identity headers (there is no request t
 
 The failure mode for TCP mode is expecting L7 behavior from an L4 tool: no path mounting, no header injection, no per-request identity. If you need those, the payload must be HTTP and you must use the HTTP modes.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 300" role="img" aria-label="Data paths for serve versus Funnel">
   <title>Serve keeps traffic inside the tailnet; Funnel adds a public relay hop that cannot decrypt</title>
   <rect x="10" y="30" width="330" height="240" fill="var(--diagram-bg)" stroke="var(--diagram-line)" rx="8"/>
@@ -149,6 +150,7 @@ The failure mode for TCP mode is expecting L7 behavior from an L4 tool: no path 
   <text x="505" y="140" text-anchor="middle" fill="var(--diagram-text)" font-size="10">public DNS resolves to relay IP</text>
   <text x="505" y="155" text-anchor="middle" fill="var(--diagram-text)" font-size="10">relay is a blind TCP proxy</text>
 </svg>
+</div>
 
 ### Funnel: opening the front door, narrowly
 
@@ -205,6 +207,7 @@ Since GA, services also support declarative configuration: a JSON file on the pr
 
 The failure mode: treating a Service like a load balancer with health checks. Availability is judged by whether the proxy node is online in the tailnet, not by whether your application behind it is healthy. A proxy whose backend process crashed still advertises happily and still receives traffic. You need process supervision on the backend, or the tsnet lifecycle integration below, which ties advertisement to the application itself.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 320" role="img" aria-label="Tailscale Services architecture with failover">
   <title>A client resolves a service name to a TailVIP; the control plane routes it to approved proxies, failing over when one drops</title>
   <rect x="20" y="120" width="120" height="46" fill="var(--diagram-bg)" stroke="var(--diagram-line)" rx="6"/>
@@ -232,6 +235,7 @@ The failure mode: treating a Service like a load balancer with health checks. Av
   <line x1="580" y1="150" x2="630" y2="118" stroke="var(--diagram-line)" stroke-width="2"/>
   <text x="390" y="230" text-anchor="middle" fill="var(--diagram-text)" font-size="10">no traffic to drained host</text>
 </svg>
+</div>
 
 ### tsnet and the register, route, drain lifecycle
 
@@ -256,6 +260,7 @@ Four questions settle almost every case.
 
 And one veto: if the workload is UDP or needs raw L3 semantics, none of the proxy modes apply except the Linux-only Services L3 endpoint; otherwise you are back to plain tailnet routing (Module 07).
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 360" role="img" aria-label="Decision tree for choosing an exposure mechanism">
   <title>Decision tree: audience, role versus machine, and code ownership select Funnel, Services, serve, tsnet, or tailscale cert</title>
   <rect x="290" y="15" width="180" height="44" fill="var(--diagram-bg)" stroke="var(--diagram-accent)" rx="8"/>
@@ -283,6 +288,7 @@ And one veto: if the workload is UDP or needs raw L3 semantics, none of the prox
   <line x1="490" y1="239" x2="440" y2="290" stroke="var(--diagram-line)" stroke-width="2"/>
   <line x1="545" y1="239" x2="620" y2="290" stroke="var(--diagram-line)" stroke-width="2"/>
 </svg>
+</div>
 
 ## On the wire
 

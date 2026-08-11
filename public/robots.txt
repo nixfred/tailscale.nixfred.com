@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tailscale.nixfred.com/sitemap-index.xml

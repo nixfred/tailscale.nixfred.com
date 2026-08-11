@@ -100,6 +100,7 @@ This is the part that makes or breaks real deployments, because Tailscale does n
 
 The analogy: Tailscale is a new tenant who needs their mail routed correctly in three different countries, each with a different postal bureaucracy. Same goal everywhere, three different sets of forms.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 880 360" role="img" aria-label="Per-platform DNS plumbing: Linux systemd-resolved, macOS scoped resolvers, and Windows NRPT all direct queries to the local Quad100 resolver">
   <title>How each OS routes DNS queries to Quad100</title>
   <defs>
@@ -132,6 +133,7 @@ The analogy: Tailscale is a new tenant who needs their mail routed correctly in 
   <text x="440" y="300" text-anchor="middle" fill="var(--diagram-text)" font-size="14" font-weight="bold">Quad100 resolver in tailscaled</text>
   <text x="440" y="322" text-anchor="middle" fill="var(--diagram-text)" font-size="12">100.100.100.100:53</text>
 </svg>
+</div>
 
 **Linux.** There is no single Linux DNS system, so Tailscale detects what is managing `/etc/resolv.conf` and cooperates with it. The preferred setup is systemd-resolved: Tailscale registers its resolver and its domains with resolved, resolved keeps its stub on 127.0.0.53, and `/etc/resolv.conf` should be a symlink to `/run/systemd/resolve/stub-resolv.conf`. In that world, real split DNS works: resolved sends ts.net (and any restricted domains) to Quad100 and everything else wherever it was already going. If nothing is managing resolv.conf, Tailscale falls back to rewriting the file directly, placing `100.100.100.100` as the nameserver. That works, but it is a shared file with no locking: `dhclient`, NetworkManager, and cloud-init all believe they own it too, and the last writer wins. Tailscale's own Linux DNS documentation is frank that this is a messy space and recommends centralizing on systemd-resolved or resolvconf so DHCP clients stop fighting over the file.
 
@@ -163,6 +165,7 @@ The mechanism: a restricted nameserver is a resolver paired with a domain. Confi
 
 Two behavioral notes worth engraving. First, ordering: when you list multiple resolvers, modern OS resolver stacks may query them in parallel or reorder them by performance, and Tailscale explicitly does not guarantee that resolvers are consulted in the order configured. If order matters to you, that is the signal that you actually want split DNS, where domain matching replaces ordering. Second, search domains: you can add tailnet wide search domains so short internal names expand for everyone, usable on devices running Tailscale v1.34 and later.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 880 420" role="img" aria-label="Decision flow inside the Quad100 resolver: MagicDNS match answers locally, restricted domain match forwards to that nameserver, otherwise global or local resolvers handle the query">
   <title>Quad100 query decision flow</title>
   <defs>
@@ -204,6 +207,7 @@ Two behavioral notes worth engraving. First, ordering: when you list multiple re
   <text x="440" y="376" text-anchor="middle" fill="var(--diagram-text)" font-size="12">forward to the resolvers</text>
   <text x="440" y="393" text-anchor="middle" fill="var(--diagram-text)" font-size="12">the OS already had</text>
 </svg>
+</div>
 
 The failure mode: split DNS quietly depends on reachability of the restricted nameserver, which is often itself behind Tailscale (a subnet router or an internal node). When that path breaks, only names under the restricted domain die, which produces the classic confusing symptom: "the internet is fine, ts.net names are fine, but everything under corp.example times out." That pattern is a routing problem wearing a DNS costume; check Module 07 before you blame the resolver.
 
@@ -217,6 +221,7 @@ The control: in the admin console, each nameserver has a "Use with exit node" se
 
 The failure mode: an exit node whose own DNS is broken breaks DNS for every client currently using it, and the clients' own perfectly healthy resolvers do not save them. Symptom signature: names fail only while the exit node is selected, `tailscale ping` to peers still works, and deselecting the exit node instantly fixes resolution.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 880 300" role="img" aria-label="Sequence of a DNS query while an exit node is active: app to Quad100, MagicDNS answered locally, other queries forwarded through the tunnel to the exit node's resolver path">
   <title>DNS query path with an active exit node</title>
   <defs>
@@ -249,6 +254,7 @@ The failure mode: an exit node whose own DNS is broken breaks DNS for every clie
   <text x="690" y="193" text-anchor="middle" fill="var(--diagram-text)" font-size="12">"Use with exit node" still receive</text>
   <text x="690" y="210" text-anchor="middle" fill="var(--diagram-text)" font-size="12">their matching queries directly</text>
 </svg>
+</div>
 
 ## On the wire
 

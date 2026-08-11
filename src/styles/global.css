@@ -249,14 +249,41 @@ video {
   border-bottom: 1px solid var(--line);
 }
 
-.prose svg {
-  background: var(--diagram-bg);
+/* Diagrams keep a legible minimum width and scroll inside their own
+   box. Shrinking a 760 unit diagram onto a 390px screen renders its
+   labels at about 5px, which destroys the content. The page body never
+   scrolls sideways; only this wrapper does. The wrapper is written
+   explicitly into the Markdown source around each diagram rather than
+   injected by a plugin: Astro represents raw HTML in Markdown
+   inconsistently, and a rehype plugin silently wrapped only 3 of 57
+   diagrams before this approach replaced it. */
+.diagram-wrap {
+  overflow-x: auto;
+  max-width: 800px;
+  margin: var(--space-4) 0;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: var(--space-3);
-  margin: var(--space-4) 0;
+  background: var(--diagram-bg);
+}
+
+/* The wrapper owns the frame now. Inner diagrams that carry their own
+   class (page level ones with scoped styles) must not draw a second
+   border, background, or margin. The [class] attribute selector is
+   deliberate: it outranks Astro scoped component styles, which would
+   otherwise win and double the frame. */
+.diagram-wrap svg[class] {
+  border: none;
+  background: none;
+  margin: 0;
+  max-width: none;
+}
+
+.diagram-wrap svg {
+  min-width: 600px;
   width: 100%;
   height: auto;
+  padding: var(--space-3);
+  display: block;
 }
 
 .prose blockquote {

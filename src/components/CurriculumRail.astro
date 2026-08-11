@@ -1,0 +1,97 @@
+---
+// Curriculum rail: all thirteen modules as a numbered track with the
+// current one marked. Data driven from the modules collection, so it
+// can never drift out of sync with what actually exists.
+interface Props {
+  current: number;
+  modules: { module: number; title: string }[];
+}
+
+const { current, modules } = Astro.props;
+const sorted = [...modules].sort((a, b) => a.module - b.module);
+const SLOT = 52;
+const GAP = 5;
+const total = sorted.length * SLOT + (sorted.length - 1) * GAP;
+const startX = Math.round((760 - total) / 2);
+const here = sorted.find((m) => m.module === current);
+const idx = sorted.findIndex((m) => m.module === current);
+const hereX = startX + idx * (SLOT + GAP) + SLOT / 2;
+---
+
+<div class="diagram-wrap">
+<svg
+  class="rail"
+  viewBox="0 0 760 108"
+  role="img"
+  aria-label={`Curriculum position: module ${current} of ${sorted.length} published modules`}
+>
+  <title>Where this module sits in the curriculum</title>
+  <line
+    x1={startX}
+    y1="46"
+    x2={startX + total}
+    y2="46"
+    stroke="var(--diagram-line)"
+    stroke-width="1.5"
+  />
+  {sorted.map((m, i) => {
+    const x = startX + i * (SLOT + GAP);
+    const on = m.module === current;
+    return (
+      <g>
+        <rect
+          x={x}
+          y="28"
+          width={SLOT}
+          height="36"
+          rx="6"
+          fill="var(--diagram-bg)"
+          stroke={on ? 'var(--diagram-accent)' : 'var(--diagram-line)'}
+          stroke-width={on ? '2.5' : '1.5'}
+        />
+        <text
+          x={x + SLOT / 2}
+          y="51"
+          text-anchor="middle"
+          font-size="13"
+          font-family="var(--font-mono)"
+          fill={on ? 'var(--diagram-accent)' : 'var(--diagram-text)'}
+        >
+          {String(m.module).padStart(2, '0')}
+        </text>
+      </g>
+    );
+  })}
+  {here && (
+    <g>
+      <path
+        d={`M${hereX} 70 l6 10 l-12 0 z`}
+        fill="var(--diagram-accent)"
+        transform={`rotate(180 ${hereX} 75)`}
+      />
+      <text
+        x="380"
+        y="98"
+        text-anchor="middle"
+        font-size="13"
+        font-family="var(--font-mono)"
+        fill="var(--diagram-text)"
+      >
+        {`${String(here.module).padStart(2, '0')} ${here.title}`}
+      </text>
+    </g>
+  )}
+</svg>
+</div>
+
+<style>
+  .rail {
+    width: 100%;
+    max-width: 800px;
+    background: var(--diagram-bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: var(--space-2);
+    margin-bottom: var(--space-5);
+  }
+</style>

@@ -81,6 +81,7 @@ The mechanism: the control plane stores, for each node key, either a user accoun
 
 The failure mode: assuming a device has both. It never does. The tags KB is blunt: "Applying a tag to a device removes any user-based authentication," and re-authenticating interactively as a user removes all tags. Half the confusing policy bugs in real tailnets come from forgetting this substitution.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 300" role="img" aria-label="Decision tree for which identity and credential a node should get">
   <title>Choosing the right identity and credential</title>
   <rect x="290" y="10" width="180" height="40" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-line)"/>
@@ -111,6 +112,7 @@ The failure mode: assuming a device has both. It never does. The tags KB is blun
   <line x1="150" y1="140" x2="150" y2="190" stroke="var(--diagram-line)" stroke-dasharray="4 3"/>
   <text x="160" y="168" fill="var(--diagram-text)" font-size="11">needs the API too?</text>
 </svg>
+</div>
 
 ### SSO: renting the front door
 
@@ -164,6 +166,7 @@ The analogy: converting your personal car into a company van. The moment the fle
 
 The mechanism: tags are declared in the `tagOwners` section of the tailnet policy file, which "defines the tags assignable to devices and the list of users allowed to assign each tag" (Owners, Admins, and Network admins can apply any tag, even ones they do not own). You apply tags from the admin console Machines page, from the CLI with `tailscale login --advertise-tags=tag:name` (the device must be allowed to claim that tag), from the API, or by enrolling with a tagged auth key. Once tagged, the node's owner in the control plane is the tag set, full stop. ACLs written as `src: ["tag:ci"]` or `dst: ["tag:prod:443"]` match it; rules written against the former user do not.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 260" role="img" aria-label="State flow showing how a node moves between user identity and tag identity while the node key persists">
   <title>The identity transplant: user identity versus tag identity</title>
   <rect x="60" y="70" width="240" height="70" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-line)"/>
@@ -186,6 +189,7 @@ The mechanism: tags are declared in the `tagOwners` section of the tailnet polic
   <line x1="180" y1="140" x2="260" y2="190" stroke="var(--diagram-line)" stroke-dasharray="4 3"/>
   <line x1="580" y1="140" x2="500" y2="190" stroke="var(--diagram-line)" stroke-dasharray="4 3"/>
 </svg>
+</div>
 
 Three concrete consequences, all documented and all regularly discovered the hard way:
 
@@ -236,6 +240,7 @@ The failure mode: claim mismatch. Federation trades secret management for config
 
 > [!ON-THE-WIRE] The WIF exchange is ordinary HTTPS to `api.tailscale.com`, not tunnel traffic. A CI job doing keyless join makes exactly two identity round trips: one to its own platform's metadata or OIDC endpoint for the JWT, one to Tailscale's token-exchange endpoint. Only after both succeed does anything from Modules 01 through 03 (keys, control plane, NAT traversal) begin.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 340" role="img" aria-label="Sequence of workload identity federation token exchange">
   <title>Workload identity federation: token exchange sequence</title>
   <line x1="120" y1="60" x2="120" y2="310" stroke="var(--diagram-line)"/>
@@ -260,6 +265,7 @@ The failure mode: claim mismatch. Federation trades secret management for config
   <line x1="120" y1="290" x2="640" y2="290" stroke="var(--diagram-line)"/>
   <text x="380" y="282" text-anchor="middle" fill="var(--diagram-text)" font-size="12">mint auth key / join tailnet, no stored secret</text>
 </svg>
+</div>
 
 ## On the wire
 

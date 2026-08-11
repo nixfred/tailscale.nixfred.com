@@ -1,0 +1,98 @@
+---
+// Drill coverage map: the six failure areas with the real number of
+// drills in each, current area marked. Counts come from the collection,
+// so the picture is always the truth about what is published.
+interface Props {
+  counts: { area: string; n: number }[];
+  current?: string;
+}
+
+const { counts, current } = Astro.props;
+const BOX = 118;
+const GAP = 8;
+const total = counts.length * BOX + (counts.length - 1) * GAP;
+const startX = Math.round((760 - total) / 2);
+const maxN = Math.max(1, ...counts.map((c) => c.n));
+---
+
+<div class="diagram-wrap">
+<svg
+  class="areamap"
+  viewBox="0 0 760 132"
+  role="img"
+  aria-label={`Drill coverage by failure area: ${counts.map((c) => `${c.area} ${c.n}`).join(', ')}`}
+>
+  <title>Which failure areas the drills cover</title>
+  {counts.map((c, i) => {
+    const x = startX + i * (BOX + GAP);
+    const on = c.area === current;
+    const barW = Math.round((c.n / maxN) * (BOX - 24));
+    return (
+      <g>
+        <rect
+          x={x}
+          y="18"
+          width={BOX}
+          height="72"
+          rx="8"
+          fill="var(--diagram-bg)"
+          stroke={on ? 'var(--diagram-accent)' : 'var(--diagram-line)'}
+          stroke-width={on ? '2.5' : '1.5'}
+        />
+        <text
+          x={x + BOX / 2}
+          y="42"
+          text-anchor="middle"
+          font-size="12"
+          font-family="var(--font-mono)"
+          fill={on ? 'var(--diagram-accent)' : 'var(--diagram-text)'}
+        >
+          {c.area}
+        </text>
+        <rect
+          x={x + 12}
+          y="54"
+          width={barW}
+          height="10"
+          rx="3"
+          fill="var(--diagram-accent)"
+          opacity={on ? '1' : '0.55'}
+        />
+        <text
+          x={x + BOX / 2}
+          y="82"
+          text-anchor="middle"
+          font-size="11"
+          font-family="var(--font-mono)"
+          fill="var(--diagram-text)"
+        >
+          {c.n === 1 ? '1 drill' : `${c.n} drills`}
+        </text>
+      </g>
+    );
+  })}
+  <text
+    x="380"
+    y="116"
+    text-anchor="middle"
+    font-size="11"
+    font-family="var(--font-mono)"
+    fill="var(--diagram-text)"
+    opacity="0.75"
+  >
+    bar length is the count, not a difficulty or importance score
+  </text>
+</svg>
+</div>
+
+<style>
+  .areamap {
+    width: 100%;
+    max-width: 800px;
+    background: var(--diagram-bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: var(--space-2);
+    margin-bottom: var(--space-5);
+  }
+</style>
