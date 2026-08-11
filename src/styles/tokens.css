@@ -1,0 +1,109 @@
+/* ============================================================
+   tailscale.nixfred.com, design tokens
+   REBRAND ME: this palette is the factory placeholder, carried
+   over from the reference implementation. Stage 2 replaces every
+   value from the build pack's design system before any page ships.
+   Use tokens, never raw hex, anywhere downstream.
+   If you DELETE a token, grep the whole src/ tree for its name
+   first. A dangling var() does not error, it silently renders
+   nothing, which is how a transparent button shipped once.
+   ============================================================ */
+
+:root {
+  /* Accent ramp: primary action and highlight */
+  --accent-300: #f2c14e;
+  --accent-500: #e0a32e;
+  /* Tap highlight wash, accent at low alpha. Kept here so no component
+     hand rolls an rgba(). */
+  --tap-highlight: rgba(224, 163, 46, 0.18);
+  --accent-700: #b57f16;
+
+  /* Deep Space Navy ramp: institutional seriousness */
+  --base-950: #050d1c;
+  --base-900: #081426;
+  --base-800: #0e1f3a;
+  --base-700: #1a3054;
+  --base-600: #274268;
+
+  /* Editorial surface, DARK ERA (decision 0005: the Off White scheme is
+     retired, Fred's ruling on the live site). Names are historical from
+     the light era, values are dark. Rename debt accepted knowingly:
+     --paper is the editorial base, --ink is TEXT (now light),
+     --gray-200 is LINES on dark, --gray-500/700 are muted text tiers. */
+  --paper: #0b1322;
+  --paper-warm: #101a2e;
+  --gray-200: #223145;
+  --gray-500: #74819a;
+  --gray-700: #a7b2c6;
+  --ink: #e8edf7;
+
+  /* Warning Red: crisis alerts only. Do not decorate with it. */
+  --alert-red: #b3261e;
+  --alert-red-bg: #f9e9e8;
+
+  /* Typography */
+  --font-display: 'Playfair Display', 'Times New Roman', serif;
+  --font-sans: 'Public Sans', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Type scale, editorial */
+  --text-xs: 0.75rem;
+  --text-sm: 0.9rem; /* 16.2px at the 18px root: above iOS's zoom-on-focus threshold */
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: clamp(2.4rem, 5vw, 3.4rem);
+  --text-hero: clamp(2.8rem, 7vw, 4.8rem);
+
+  /* Spacing rhythm */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 3.4rem;
+  --space-7: 4.8rem;
+
+  /* Layout */
+  --header-h: 72px; /* the pinned header; every sticky offset derives from this */
+  --measure: 68ch;
+  --page-max: 1200px;
+  --page-wide: 1400px;
+  --radius: 6px;
+  --radius-lg: 12px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 160ms;
+  --dur-med: 320ms;
+  --dur-slow: 640ms;
+}
+
+/* Editorial surface (default): soft dark, light text (decision 0005) */
+:root,
+[data-surface='editorial'] {
+  --bg: var(--paper);
+  --bg-alt: var(--paper-warm);
+  --text: var(--ink);
+  --text-muted: var(--gray-700);
+  --text-faint: var(--gray-500);
+  --line: var(--gray-200);
+  --accent: var(--accent-300);
+  --accent-strong: var(--accent-500);
+  --card-bg: #121d33;
+}
+
+/* Crisis surface: Deep Space Navy, used by crisis, science,
+   status, emergency, and hero sections */
+[data-surface='crisis'] {
+  --bg: var(--base-900);
+  --bg-alt: var(--base-800);
+  --text: #eef1f7;
+  --text-muted: #aab6c9;
+  --text-faint: #7a879c;
+  --line: #22385c;
+  --accent: var(--accent-300);
+  --accent-strong: var(--accent-500);
+  --card-bg: var(--base-800);
+}

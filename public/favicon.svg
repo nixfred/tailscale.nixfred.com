@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="tailscale.nixfred.com">
+  <title>tailscale.nixfred.com</title>
+  <!-- REBRAND ME: factory placeholder mark. Stage 2 replaces this with
+       the site's own mark. Colors mirror the seed's tokens.css because
+       an SVG file cannot read CSS custom properties; keep them in sync
+       by hand when the palette changes. -->
+  <rect width="32" height="32" rx="6" fill="#081426"/>
+  <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" fill="none" stroke="#223145"/>
+  <circle cx="16" cy="16" r="7" fill="#e0a32e"/>
+</svg>
