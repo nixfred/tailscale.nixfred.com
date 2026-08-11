@@ -1,0 +1,171 @@
+---
+// Curriculum index. Live modules come from the content collection.
+// Planned modules render as authored prose with NO links (Law 12: no
+// placeholders, no dead links; the link gate enforces the contract).
+import Shell from '../../layouts/Shell.astro';
+import { getCollection } from 'astro:content';
+
+const modules = (await getCollection('modules')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const liveSlugs = new Set(modules.map((m) => m.data.slug));
+
+const planned = [
+  { n: 4, title: 'Identity and auth', note: 'SSO, auth keys, tags, device identity, workload identity federation.' },
+  { n: 5, title: 'Policy: ACLs and grants', note: 'The tailnet policy file, grants, autogroups, posture, and the classic lockout traps.' },
+  { n: 6, title: 'DNS: MagicDNS and split DNS', note: 'The resolution chain end to end, per OS behavior, and the failure catalog.' },
+  { n: 7, title: 'Routing', note: 'Subnet routers, exit nodes, site to site, 4via6, app connectors, route conflicts.' },
+  { n: 8, title: 'Exposing services', note: 'Serve, Funnel, HTTPS certificates, Tailscale Services, tsnet.' },
+  { n: 9, title: 'The platform matrix', note: 'Linux, macOS, Windows, mobile, headless, containers, the Kubernetes operator.' },
+  { n: 10, title: 'Enterprise operations', note: 'Logging and audit, SCIM, Tailnet Lock, device approval, operating at scale.' },
+  { n: 12, title: 'The codebase', note: 'A guided tour of the open source repo: wgengine, magicsock, ipnlocal, derp, tsnet.' },
+].filter((p) => !liveSlugs.has(String(p.n)));
+---
+
+<Shell
+  title="Learn Tailscale: the curriculum"
+  description="Numbered modules that explain Tailscale from the WireGuard handshake up: mechanism, wire format, failure modes."
+>
+  <main id="main">
+    <header class="page-head">
+      <p class="eyebrow">Curriculum</p>
+      <h1>Read the mesh in order.</h1>
+      <p class="lede">
+        Each module explains one layer three ways: an analogy, the mechanism,
+        and the failure modes. Then it shows the layer on the wire and ends with
+        scenario questions that have real answers. Modules publish in numbered
+        order; the list below shows exactly what exists today.
+      </p>
+    </header>
+
+    <section aria-label="Live modules">
+      <h2>Live now</h2>
+      <ol class="module-list">
+        {modules.map((m) => (
+          <li>
+            <a class="row" href={`/learn/${m.data.slug}`}>
+              <span class="mono num">{String(m.data.module).padStart(2, '0')}</span>
+              <span class="body">
+                <span class="title">{m.data.title}</span>
+                <span class="desc">{m.data.description}</span>
+              </span>
+              <span class="mono meta">
+                {m.data.words ? `${Math.max(1, Math.round((m.data.words ?? 0) / 230))} min` : ''}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section aria-label="In the workshop">
+      <h2>In the workshop</h2>
+      <p>
+        Written next, in this order. These are titles and scope, not links:
+        a module appears above only when it is real.
+      </p>
+      <ol class="planned">
+        {planned.map((p) => (
+          <li>
+            <span class="mono num">{String(p.n).padStart(2, '0')}</span>
+            <span class="body">
+              <span class="title">{p.title}</span>
+              <span class="desc">{p.note}</span>
+            </span>
+          </li>
+        ))}
+      </ol>
+    </section>
+  </main>
+</Shell>
+
+<style>
+  main {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .page-head {
+    padding: var(--space-6) 0 var(--space-4);
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+    max-width: 58ch;
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+    margin-top: var(--space-5);
+  }
+
+  .module-list,
+  .planned {
+    list-style: none;
+    margin: var(--space-4) 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .row,
+  .planned li {
+    display: flex;
+    gap: var(--space-3);
+    align-items: baseline;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .row {
+    background: var(--card-bg);
+    transition: border-color var(--dur-fast) var(--ease-out);
+  }
+
+  .row:hover {
+    border-color: var(--accent);
+  }
+
+  .planned li {
+    opacity: 0.75;
+  }
+
+  .num {
+    color: var(--accent);
+    font-size: var(--text-sm);
+    flex-shrink: 0;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+
+  .desc {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .meta {
+    margin-left: auto;
+    color: var(--text-faint);
+    font-size: var(--text-xs);
+    flex-shrink: 0;
+  }
+</style>

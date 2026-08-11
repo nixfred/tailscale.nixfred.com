@@ -49,7 +49,7 @@ Plus labs (`/labs/`): at least 10 exercises actually executed on the author's ow
 
 ## Site rules (stricter than factory baseline)
 
-1. This is a product field guide and lab notebook only. No recruiting, hiring, candidate, or career framing anywhere: copy, metadata, routes, image text, alt text, structured data, commit messages.
+1. This is a product field guide and lab notebook only. No recruiting, hiring, candidate, or career framing anywhere: copy, metadata, routes, image text, alt text, structured data, commit messages. <!-- guardrail:allow -->
 2. Tailnet privacy: published lab material uses generic hostnames (node-a, lab-vm-1), no real IPs beyond documentation ranges, no keys, no policy files copied verbatim from a real tailnet. Sanitization happens before commit, not before deploy.
 3. Brand separation: no use of Tailscale's logo or visual identity. The name appears only nominatively. One disclosure line in the global footer: unofficial, not affiliated with or endorsed by Tailscale Inc.
 4. These rules are enforced by `tests/check-guardrail.sh` in addition to the seed gates, proven with known bad input before first use.

@@ -1,0 +1,137 @@
+---
+// The sources ledger. Aggregates every source cited by every module,
+// with the date each was last checked. This page is the receipt trail
+// for the whole site (LAWS 9, STANDARDS 2).
+import Shell from '../layouts/Shell.astro';
+import { getCollection } from 'astro:content';
+
+const modules = (await getCollection('modules')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+type Row = {
+  url: string;
+  title: string;
+  checked: string;
+  usedBy: string[];
+};
+
+const byUrl = new Map<string, Row>();
+for (const m of modules) {
+  const label = `${String(m.data.module).padStart(2, '0')} ${m.data.title}`;
+  for (const s of m.data.sources) {
+    const row = byUrl.get(s.url);
+    if (row) {
+      row.usedBy.push(label);
+      if (s.checked > row.checked) row.checked = s.checked;
+    } else {
+      byUrl.set(s.url, { url: s.url, title: s.title, checked: s.checked, usedBy: [label] });
+    }
+  }
+}
+const rows = [...byUrl.values()].sort((a, b) => a.title.localeCompare(b.title));
+---
+
+<Shell
+  title="Sources ledger · Tailscale Field Guide"
+  description="Every source this site cites, with the date each was last checked against official documentation."
+>
+  <main id="main">
+    <header class="page-head">
+      <p class="eyebrow">Receipts</p>
+      <h1>The sources ledger.</h1>
+      <p class="lede">
+        Every factual product claim on this site resolves to an entry here. The
+        hierarchy: official documentation first, then the knowledge base, the
+        changelog, the official blog, and the open source code itself. Third
+        party writeups are leads for investigation, never citations. When
+        official pages conflict, the narrowest current claim wins and the
+        resolution is noted on this page.
+      </p>
+    </header>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Source</th>
+            <th>Checked</th>
+            <th>Cited by</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr>
+              <td><a href={r.url}>{r.title}</a></td>
+              <td class="mono">{r.checked}</td>
+              <td class="mono used">{r.usedBy.join(', ')}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <p class="count mono">{rows.length} sources on ledger.</p>
+  </main>
+</Shell>
+
+<style>
+  main {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .page-head {
+    padding: var(--space-6) 0 var(--space-4);
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+    max-width: 62ch;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: var(--space-2) var(--space-3);
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+
+  th {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+  }
+
+  .used {
+    color: var(--text-faint);
+    font-size: var(--text-xs);
+  }
+
+  .count {
+    margin-top: var(--space-3);
+    color: var(--text-faint);
+    font-size: var(--text-sm);
+  }
+</style>
