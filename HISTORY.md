@@ -58,5 +58,5 @@ facts, style, and cross references against the canonical module table
 edits needed this time). One guardrail catch: a courier analogy used a
 banned word metaphorically and was reworded. The curriculum now stands
 complete: thirteen modules, 00 through 12, roughly 56,000 words,
-124 ledger source entries, every page carrying token built SVG
+94 deduplicated ledger sources, every page carrying token built SVG
 diagrams.
