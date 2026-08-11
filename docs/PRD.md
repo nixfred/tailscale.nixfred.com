@@ -13,12 +13,13 @@ Network engineers, homelabbers, and support or field engineers who run tailnets 
 1. Reference mode: a reader with 30 seconds finds the exact flag, ACL stanza, or failure signature.
 2. Study mode: a reader with two hours works a module end to end and comes out able to whiteboard the mechanism.
 
-## Content architecture: four tracks
+## Content architecture: five tracks
 
 1. **Curriculum** (`/learn/`): 13 sequential modules, from orientation through WireGuard foundations, the control plane, NAT traversal (STUN, DERP, Peer Relays), identity, ACLs and grants, MagicDNS, routing, Serve and Funnel and Services, the platform matrix, enterprise operations, troubleshooting, and a tour of the open source codebase.
 2. **Feature encyclopedia** (`/features/` plus `/cli/`): one reference page per feature and a complete CLI subcommand tour. Coverage target: every feature on the official docs site plus the current changelog.
 3. **Fieldcraft** (`/fieldcraft/` plus `/drills/`): evidence collection, reproduction construction, the engineering handoff package, and written case study drills (symptom, evidence, hypothesis tree, root cause, handoff). Minimum 15 drills.
-4. **Code lab** (`/code-lab/`): guided reads of the open source Go codebase, pprof profile exercises, and annotated packet captures of STUN, DERP, and WireGuard traffic.
+4. **Recipes** (`/recipes/`): capabilities worth building on a working tailnet, each with mechanism, exact commands, verification, and traps. Two are drawn from the author's own fleet and published sanitized; the rest are researched from official sources. Added on Fred's instruction 2026-08-11, DECISIONS 0011.
+5. **Code lab** (`/code-lab/`): guided reads of the open source Go codebase, pprof profile exercises, and annotated packet captures of STUN, DERP, and WireGuard traffic.
 
 Plus labs (`/labs/`): at least 10 exercises actually executed on the author's own tailnet (a mixed fleet of macOS, Linux, VMs, and cloud hosts), published with generic hostnames.
 

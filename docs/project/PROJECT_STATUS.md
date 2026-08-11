@@ -6,7 +6,7 @@
 
 ## Current phase
 
-ALL WRITTEN TRACKS COMPLETE 2026-08-10. Thirteen curriculum modules,
+RECIPES TRACK ADDED 2026-08-11, on top of the complete written tracks. Thirteen curriculum modules,
 fifteen drills across six failure areas, four fieldcraft guides, four
 code lab guides. Every page carries two or more custom SVG graphics,
 with every number in every graphic computed from the content at build

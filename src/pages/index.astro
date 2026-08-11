@@ -9,10 +9,12 @@ const modules = (await getCollection('modules')).sort(
 );
 const drills = await getCollection('drills');
 const guides = await getCollection('guides');
+const recipes = await getCollection('recipes');
 const totalWords =
   modules.reduce((n, m) => n + (m.data.words ?? 0), 0) +
   drills.reduce((n, d) => n + (d.data.words ?? 0), 0) +
-  guides.reduce((n, g) => n + (g.data.words ?? 0), 0);
+  guides.reduce((n, g) => n + (g.data.words ?? 0), 0) +
+  recipes.reduce((n, r) => n + (r.data.words ?? 0), 0);
 ---
 
 <Shell
@@ -33,7 +35,7 @@ const totalWords =
           tested on a real tailnet before it is published.
         </p>
         <p class="mono status">
-          {modules.length} modules · {drills.length} drills · {guides.length} guides · {totalWords.toLocaleString('en-US')} words · every claim sourced
+          {modules.length} modules · {recipes.length} recipes · {drills.length} drills · {guides.length} guides · {totalWords.toLocaleString('en-US')} words · every claim sourced
         </p>
         <div class="subject">
           <img
@@ -121,6 +123,13 @@ const totalWords =
           modules from orientation through WireGuard, the control plane, NAT
           traversal, identity, policy, DNS, routing, services, platforms,
           operations, troubleshooting, and a tour of the codebase.
+        </li>
+        <li>
+          <strong><a href="/recipes">Recipes.</a></strong> The useful and
+          slightly clever things worth building once you trust the mesh:
+          machines that enroll themselves, services published without opening
+          a port, keyless SSH that keeps receipts, and programs that are
+          tailnet members in their own right.
         </li>
         <li>
           <strong><a href="/drills">Drills.</a></strong> Written escalation case
