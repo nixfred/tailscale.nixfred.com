@@ -17,18 +17,66 @@ const totalWords = modules.reduce((n, m) => n + (m.data.words ?? 0), 0);
 >
   <main id="main">
     <section class="hero">
-      <p class="eyebrow">Unofficial field guide and lab notebook</p>
-      <h1>How Tailscale actually works.</h1>
-      <p class="lede">
-        Mechanism first, marketing never. This site explains the mesh from the
-        WireGuard handshake up: the control plane, NAT traversal, DERP, MagicDNS,
-        ACLs, and what every CLI command really tells you. Every factual claim
-        traces to an official source with a checked date, and the lab material is
-        tested on a real tailnet before it is published.
-      </p>
-      <p class="mono status">
-        {modules.length} modules live · {totalWords.toLocaleString('en-US')} words · every claim sourced
-      </p>
+      <div class="hero-copy">
+        <p class="eyebrow">Unofficial field guide and lab notebook</p>
+        <h1>How Tailscale actually works.</h1>
+        <p class="lede">
+          Mechanism first, marketing never. This site explains the mesh from the
+          WireGuard handshake up: the control plane, NAT traversal, DERP, MagicDNS,
+          ACLs, and what every CLI command really tells you. Every factual claim
+          traces to an official source with a checked date, and the lab material is
+          tested on a real tailnet before it is published.
+        </p>
+        <p class="mono status">
+          {modules.length} modules live · {totalWords.toLocaleString('en-US')} words · every claim sourced
+        </p>
+        <div class="subject">
+          <img
+            src="/brand/tailscale-logo-white.svg"
+            alt="Tailscale wordmark"
+            width="746"
+            height="144"
+            loading="eager"
+          />
+          <p class="subject-note">
+            The subject of this guide. The Tailscale name and logo belong to
+            Tailscale Inc.; this independent site uses them only to identify the
+            product it documents.
+          </p>
+        </div>
+      </div>
+      <svg
+        class="hero-mesh"
+        viewBox="0 0 420 420"
+        role="img"
+        aria-label="A five node mesh: four devices with direct encrypted paths between them, and a dashed fallback path through a relay"
+      >
+        <title>The shape of a tailnet: direct paths first, relay as fallback</title>
+        <g stroke="var(--diagram-line)" stroke-width="1.5" fill="none">
+          <path d="M210 60 L60 210 M210 60 L360 210 M60 210 L210 360 M360 210 L210 360 M60 210 L360 210" />
+        </g>
+        <g stroke="var(--diagram-accent)" stroke-width="2.5" fill="none">
+          <path d="M210 60 L210 360" />
+        </g>
+        <g stroke="var(--diagram-line)" stroke-width="2" stroke-dasharray="6 6" fill="none">
+          <path d="M210 60 L318 108 M318 108 L360 210" />
+        </g>
+        <rect x="296" y="86" width="44" height="44" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-line)" stroke-width="1.5" />
+        <text x="318" y="113" text-anchor="middle" fill="var(--diagram-text)" font-size="12" font-family="var(--font-mono)">DERP</text>
+        <g>
+          <circle cx="210" cy="60" r="26" fill="var(--diagram-bg)" stroke="var(--diagram-accent)" stroke-width="2" />
+          <circle cx="60" cy="210" r="26" fill="var(--diagram-bg)" stroke="var(--diagram-line)" stroke-width="2" />
+          <circle cx="360" cy="210" r="26" fill="var(--diagram-bg)" stroke="var(--diagram-line)" stroke-width="2" />
+          <circle cx="210" cy="360" r="26" fill="var(--diagram-bg)" stroke="var(--diagram-accent)" stroke-width="2" />
+        </g>
+        <g fill="var(--diagram-text)" font-size="13" text-anchor="middle" font-family="var(--font-mono)">
+          <text x="210" y="65">node-a</text>
+          <text x="60" y="215">phone</text>
+          <text x="360" y="215">cloud-1</text>
+          <text x="210" y="365">node-b</text>
+        </g>
+        <text x="222" y="216" fill="var(--diagram-accent)" font-size="12" font-family="var(--font-mono)">direct</text>
+      </svg>
     </section>
 
     <section class="band">
@@ -123,6 +171,42 @@ const totalWords = modules.reduce((n, m) => n + (m.data.words ?? 0), 0);
 
   .hero {
     padding: var(--space-7) 0 var(--space-6);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+    align-items: center;
+  }
+
+  @media (min-width: 960px) {
+    .hero {
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    }
+  }
+
+  .hero-mesh {
+    width: 100%;
+    max-width: 420px;
+    justify-self: center;
+  }
+
+  .subject {
+    margin-top: var(--space-5);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--line);
+  }
+
+  .subject img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    opacity: 0.92;
+  }
+
+  .subject-note {
+    margin-top: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--text-faint);
+    max-width: 48ch;
   }
 
   h1 {

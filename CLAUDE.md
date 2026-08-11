@@ -42,6 +42,8 @@ An unofficial Tailscale field guide and lab notebook: how the mesh actually work
 4. Five semantic callouts (HOW-IT-WORKS, GOTCHA, ON-THE-WIRE, FROM-THE-FIELD, LAB) authored as blockquote markers in Markdown, transformed by src/lib/remark-callouts.mjs, styled in global.css. Callout accent tokens live in tokens.css.
 5. Module diagrams are inline SVG using ONLY the four --diagram-* tokens, viewBox only, role="img" plus aria-label plus title.
 6. Voice: direct, precise field guide. Second person allowed. Explain WHY.
+7. Every page carries at least one custom SVG graphic from tokens; module pages carry at least two (Fred ruling 2026-08-10, DECISIONS 0008).
+8. Footer renders the literal text nixfred.com as a link home on every page (Fred ruling 2026-08-10, DECISIONS 0008).
 
 ## Motion model
 
@@ -54,7 +56,7 @@ An unofficial Tailscale field guide and lab notebook: how the mesh actually work
 
 1. Product field guide positioning only. No recruiting, hiring, or career framing anywhere: copy, metadata, routes, alt text, commit messages. <!-- guardrail:allow -->
 2. Tailnet privacy: published lab material uses generic hostnames (node-a, lab-vm-1), no real IPs beyond documentation ranges, no keys, no verbatim policy files from a real tailnet. Sanitize BEFORE commit; this repo is public and history is forever.
-3. Brand separation: the vendor name appears nominatively only, no logo or visual identity imitation, one disclosure line in the global footer (rendered by Shell.astro).
+3. Brand separation: no visual identity imitation in the site design; one disclosure line in the global footer (rendered by Shell.astro). FACTORY OVERRIDE (Fred, 2026-08-10, DECISIONS 0007): the official Tailscale wordmark from their press kit renders on the homepage hero with ownership attribution, nominative use.
 4. Enforced by tests/check-guardrail.sh (banned positioning vocabulary, private machine names, local paths), proven against known bad input 2026-08-10.
 5. Every factual product claim carries a source in module frontmatter; the content collection schema (src/content.config.ts) rejects sourceless modules at build time. Official sources only: docs, KB, changelog, blog, the open source repos.
 

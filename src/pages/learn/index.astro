@@ -36,6 +36,47 @@ const planned = [
         scenario questions that have real answers. Modules publish in numbered
         order; the list below shows exactly what exists today.
       </p>
+      <svg
+        class="map"
+        viewBox="0 0 760 250"
+        role="img"
+        aria-label="The curriculum map: a data plane row, a control plane row, and an operate row, each holding four numbered modules"
+      >
+        <title>Three planes, thirteen modules</title>
+        <g fill="var(--diagram-text)" font-size="12" font-family="var(--font-mono)">
+          <text x="8" y="46">data</text>
+          <text x="8" y="126">control</text>
+          <text x="8" y="206">operate</text>
+        </g>
+        <g>
+          {[
+            { x: 90, y: 20, n: '01', t: 'WireGuard', row: 0 },
+            { x: 258, y: 20, n: '03', t: 'NAT traversal', row: 0 },
+            { x: 426, y: 20, n: '07', t: 'Routing', row: 0 },
+            { x: 594, y: 20, n: '08', t: 'Services', row: 0 },
+            { x: 90, y: 100, n: '02', t: 'Control plane', row: 1 },
+            { x: 258, y: 100, n: '04', t: 'Identity', row: 1 },
+            { x: 426, y: 100, n: '05', t: 'Policy', row: 1 },
+            { x: 594, y: 100, n: '06', t: 'DNS', row: 1 },
+            { x: 90, y: 180, n: '09', t: 'Platforms', row: 2 },
+            { x: 258, y: 180, n: '10', t: 'Operations', row: 2 },
+            { x: 426, y: 180, n: '11', t: 'Troubleshoot', row: 2 },
+            { x: 594, y: 180, n: '12', t: 'Codebase', row: 2 },
+          ].map((b) => (
+            <g>
+              <rect x={b.x} y={b.y} width="150" height="44" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-line)" stroke-width="1.5" />
+              <text x={b.x + 12} y={b.y + 27} fill="var(--diagram-accent)" font-size="13" font-family="var(--font-mono)">{b.n}</text>
+              <text x={b.x + 44} y={b.y + 27} fill="var(--diagram-text)" font-size="13" font-family="var(--font-mono)">{b.t}</text>
+            </g>
+          ))}
+        </g>
+        <g stroke="var(--diagram-line)" stroke-width="1.5" fill="none">
+          <path d="M240 42 L258 42 M408 42 L426 42 M576 42 L594 42" />
+          <path d="M240 122 L258 122 M408 122 L426 122 M576 122 L594 122" />
+          <path d="M240 202 L258 202 M408 202 L426 202 M576 202 L594 202" />
+        </g>
+        <text x="90" y="248" fill="var(--diagram-text)" font-size="12" font-family="var(--font-mono)">00 orientation opens the map. Read the rows left to right.</text>
+      </svg>
     </header>
 
     <section aria-label="Live modules">
@@ -98,6 +139,16 @@ const planned = [
     font-size: var(--text-lg);
     color: var(--text-muted);
     max-width: 58ch;
+  }
+
+  .map {
+    width: 100%;
+    max-width: 800px;
+    margin-top: var(--space-4);
+    background: var(--diagram-bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: var(--space-3);
   }
 
   h2 {

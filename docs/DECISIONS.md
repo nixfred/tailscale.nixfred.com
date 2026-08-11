@@ -25,3 +25,11 @@ After the foundation, modules 00 through 03 plus the troubleshooting module come
 ## 0006, 2026-08-10: site title treatment
 
 Title: Tailscale Field Guide. The vendor name appears nominatively only (qumulo.nixfred.com precedent), no logo or visual identity imitation, one unofficial disclosure line in the global footer.
+
+## 0007, 2026-08-10, Fred: the official Tailscale logo appears on the homepage
+
+Fred's direct instruction. The official white wordmark from Tailscale's own press kit (self hosted at public/brand/) renders in the homepage hero, captioned as the subject of the guide with ownership attribution. This amends DECISIONS 0006: the palette and visual identity separation still hold everywhere else; the logo appears nominatively on the main page only. The press kit is Tailscale's published brand distribution channel.
+
+## 0008, 2026-08-10, Fred: every page carries graphics; nixfred.com link is literal
+
+Two standing rules from Fred. One: every page on this site carries at least one custom SVG graphic built from tokens (modules carry two or more). Two: the footer link home renders the literal text nixfred.com sitewide, in addition to the byline.
