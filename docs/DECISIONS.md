@@ -43,3 +43,9 @@ Every content page carries a diagram generated from the content collections them
 ## 0010, 2026-08-10: the fieldcraft, drills, and code lab tracks ship
 
 Fifteen drills across six failure areas, four fieldcraft guides, and four code lab guides. Drills follow a fixed section order (ticket, evidence, hypothesis tree, investigation, root cause, fix and prevention, handoff package, the trap) so the format itself teaches the method. Two drills are derived from incidents on the author's own tailnet, published with generic hostnames per site rule 2.
+
+## 0011, 2026-08-11, Fred: a recipes track ships, two of them from the author's own fleet
+
+Fred's instruction: show the cool things a tailnet makes possible, five to seven of them, two drawn from how he actually runs his own network and the rest researched. Recipes are a distinct content type from drills: a drill investigates a failure, a recipe builds a capability. Fixed section order (what you get, how it works, build it, verify it, gotchas, where to take it next) with a level of intermediate or advanced and a one line payoff.
+
+The two from the author's own use are published with the specific traps that were paid for in real time, because that is what makes them worth more than the documentation: a host firewall whose enablement does not survive a reboot on one platform, reporting healthy while zero rules are loaded, and a machine whose system hostname disagreed with the name that resolves on the tailnet, in a tool that used one string for both the self check and the SSH target. Hostnames and provider names are genericized per site rule 2.

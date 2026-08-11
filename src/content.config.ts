@@ -57,4 +57,18 @@ const guides = defineCollection({
   }),
 });
 
-export const collections = { modules, drills, guides };
+const recipes = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/recipes' }),
+  schema: z.object({
+    slug: z.string(),
+    title: z.string(),
+    description: z.string(),
+    level: z.enum(['intermediate', 'advanced']),
+    payoff: z.string(),
+    order: z.number(),
+    words: z.number().optional(),
+    sources: z.array(sourceEntry).min(1),
+  }),
+});
+
+export const collections = { modules, drills, guides, recipes };

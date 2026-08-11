@@ -1,0 +1,174 @@
+---
+// Recipes index: the useful and slightly clever things a tailnet enables.
+import Shell from '../../layouts/Shell.astro';
+import { getCollection } from 'astro:content';
+
+const recipes = (await getCollection('recipes')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const levels = ['intermediate', 'advanced'] as const;
+const counts = levels.map((l) => ({
+  level: l,
+  n: recipes.filter((r) => r.data.level === l).length,
+}));
+---
+
+<Shell
+  title="Recipes · Tailscale Field Guide"
+  description="Useful and slightly clever things to build on a tailnet: zero touch VM enrollment, webhooks without a tunnel service, keyless SSH with receipts, policy as code, and more."
+>
+  <main id="main">
+    <header class="page-head">
+      <p class="eyebrow">Recipes</p>
+      <h1>Cool things a tailnet lets you do.</h1>
+      <p class="lede">
+        The curriculum explains the machine and the drills investigate it when
+        it breaks. These are the things worth building once you trust it: each
+        one is a complete recipe with the mechanism, the commands, how to prove
+        it works, and the traps. Two come from running a small fleet every day.
+        The rest are capabilities most tailnets never switch on.
+      </p>
+
+      <div class="diagram-wrap">
+        <svg
+          viewBox="0 0 760 250"
+          role="img"
+          aria-label="What each recipe changes: machines that enroll themselves, a fleet that behaves like one machine, services published without opening ports, access decided by policy rather than keys, and programs that are tailnet members themselves"
+        >
+          <title>What these recipes change about a network</title>
+          {[
+            { y: 16, from: 'configure each new box', to: 'machines arrive enrolled' },
+            { y: 62, from: 'remember which host', to: 'the fleet acts as one machine' },
+            { y: 108, from: 'open ports, forward, hope', to: 'publish without exposure' },
+            { y: 154, from: 'copy keys around', to: 'policy decides, with receipts' },
+            { y: 200, from: 'run a daemon beside the app', to: 'the program is the node' },
+          ].map((r) => (
+            <g>
+              <rect x="16" y={r.y} width="300" height="34" rx="6" fill="var(--diagram-bg)" stroke="var(--diagram-line)" stroke-width="1.5" />
+              <text x="32" y={r.y + 22} fill="var(--diagram-text)" font-size="12" font-family="var(--font-mono)" opacity="0.75">{r.from}</text>
+              <path d={`M322 ${r.y + 17} L378 ${r.y + 17}`} stroke="var(--diagram-accent)" stroke-width="2" fill="none" />
+              <path d={`M370 ${r.y + 12} L380 ${r.y + 17} L370 ${r.y + 22} z`} fill="var(--diagram-accent)" />
+              <rect x="386" y={r.y} width="358" height="34" rx="6" fill="var(--diagram-bg)" stroke="var(--diagram-accent)" stroke-width="1.5" />
+              <text x="402" y={r.y + 22} fill="var(--diagram-accent)" font-size="12" font-family="var(--font-mono)">{r.to}</text>
+            </g>
+          ))}
+        </svg>
+      </div>
+
+      <p class="mono counts">
+        {recipes.length} recipes · {counts.map((c) => `${c.n} ${c.level}`).join(' · ')}
+      </p>
+    </header>
+
+    <ol class="recipe-list">
+      {recipes.map((r) => (
+        <li>
+          <a class="row" href={`/recipes/${r.data.slug}`}>
+            <span class="mono num">{String(r.data.order).padStart(2, '0')}</span>
+            <span class="body">
+              <span class="title">{r.data.title}</span>
+              <span class="payoff">{r.data.payoff}</span>
+              <span class="desc">{r.data.description}</span>
+            </span>
+            <span class={`mono level level-${r.data.level}`}>{r.data.level}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </main>
+</Shell>
+
+<style>
+  main {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .page-head {
+    padding: var(--space-6) 0 var(--space-4);
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+    max-width: 62ch;
+  }
+
+  .counts {
+    font-size: var(--text-sm);
+    color: var(--accent);
+  }
+
+  .recipe-list {
+    list-style: none;
+    margin: var(--space-4) 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .row {
+    display: flex;
+    gap: var(--space-3);
+    align-items: baseline;
+    padding: var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    background: var(--card-bg);
+    transition: border-color var(--dur-fast) var(--ease-out);
+  }
+
+  .row:hover {
+    border-color: var(--accent);
+  }
+
+  .num {
+    color: var(--accent);
+    font-size: var(--text-sm);
+    flex-shrink: 0;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    line-height: 1.2;
+  }
+
+  .payoff {
+    color: var(--accent);
+    font-size: var(--text-sm);
+  }
+
+  .desc {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .level {
+    margin-left: auto;
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    color: var(--text-faint);
+  }
+
+  .level-advanced {
+    color: var(--accent);
+  }
+</style>

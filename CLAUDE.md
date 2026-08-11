@@ -68,7 +68,8 @@ An unofficial Tailscale field guide and lab notebook: how the mesh actually work
 4. Homepage cards render from the collection; nothing on the homepage links to a route that does not exist.
 5. Drills: Markdown in src/content/drills/, rendered at /drills/<slug>. Fixed section order (ticket, evidence, hypothesis tree, investigation, root cause, fix and prevention, handoff package, the trap). Area must be one of connectivity, identity, policy, dns, routing, platform.
 6. Guides: Markdown in src/content/guides/ with a track of fieldcraft or code-lab, rendered at /fieldcraft/<slug> or /code-lab/<slug>.
-7. Navigation diagrams (CurriculumRail, AreaMap, TrackRail in src/components/) are generated from the collections. Any number rendered inside any graphic on this site is computed at build time, never typed by hand (DECISIONS 0009).
+7. Recipes: Markdown in src/content/recipes/, rendered at /recipes/<slug>. A recipe builds a capability; a drill investigates a failure. Fixed section order (what you get, how it works, build it, verify it, gotchas, where to take it next), level of intermediate or advanced, and a one line payoff.
+8. Navigation diagrams (CurriculumRail, AreaMap, TrackRail in src/components/) are generated from the collections. Any number rendered inside any graphic on this site is computed at build time, never typed by hand (DECISIONS 0009).
 
 ## Ship checklist (factory Laws 4, 6, 11, 13, 14 plus OPERATIONS.md)
 

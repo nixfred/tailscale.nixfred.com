@@ -10,6 +10,7 @@ const modules = (await getCollection('modules')).sort(
 );
 const drills = await getCollection('drills');
 const guides = await getCollection('guides');
+const recipes = await getCollection('recipes');
 
 type Row = {
   url: string;
@@ -33,6 +34,7 @@ function add(label: string, sources: { url: string; title: string; checked: stri
 for (const m of modules) add(`${String(m.data.module).padStart(2, '0')} ${m.data.title}`, m.data.sources);
 for (const d of drills) add(`drill: ${d.data.slug}`, d.data.sources);
 for (const g of guides) add(`${g.data.track === 'fieldcraft' ? 'craft' : 'lab'}: ${g.data.slug}`, g.data.sources);
+for (const r of recipes) add(`recipe: ${r.data.slug}`, r.data.sources);
 const rows = [...byUrl.values()].sort((a, b) => a.title.localeCompare(b.title));
 
 // Citation load per track, counted from the ledger itself.
@@ -41,6 +43,7 @@ const trackCounts = [
   { label: 'drills', n: rows.filter((r) => r.usedBy.some((u) => u.startsWith('drill:'))).length },
   { label: 'fieldcraft', n: rows.filter((r) => r.usedBy.some((u) => u.startsWith('craft:'))).length },
   { label: 'code lab', n: rows.filter((r) => r.usedBy.some((u) => u.startsWith('lab:'))).length },
+  { label: 'recipes', n: rows.filter((r) => r.usedBy.some((u) => u.startsWith('recipe:'))).length },
 ];
 const maxTrack = Math.max(1, ...trackCounts.map((t) => t.n));
 const shared = rows.filter((r) => r.usedBy.length > 1).length;
