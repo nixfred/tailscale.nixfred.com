@@ -72,14 +72,14 @@ An unofficial Tailscale field guide and lab notebook: how the mesh actually work
 - [x] Hardened PRD reports READY TO BUILD
 - [x] Fred rulings recorded in docs/DECISIONS.md
 - [x] tailscale.nixfred.com live on the Pages project (bootstrap 2026-08-10)
-- [ ] nixfred.com/tailscale apex alias in apex-router table.json (path confirmed FREE 2026-08-10)
-- [ ] spikenix mirror spot-checked
-- [ ] Homepage card in nixfred.github.io portfolio.json, AFTER production verification
+- [x] nixfred.com/tailscale apex alias live, plus /ts shorthand (claimed 2026-08-10)
+- [x] spikenix mirror spot-checked (200, 2026-08-10)
+- [x] Homepage card in portfolio.json after production verification (2026-08-10; note: the v6 root bakes its own cards, registry entry alone does not surface it there)
 - [x] Footer: nixfred.com link, repo link, version tied to deployed commit (Shell.astro)
-- [ ] Link gate, copy gate, canonical gate, safety gate, guardrail gate, contrast gate green
-- [ ] Browser-verified at 390/820/1440 with screenshots
+- [x] All six gates green locally and on the fresh-checkout Actions run (2026-08-10)
+- [x] Browser-verified at 390/820/1440 with screenshots; footer version matched deployed commit (2026-08-10)
 - [x] Motion: functional only, reduced motion covered by global kill rule
 - [x] No live data, no user input, no scheduled jobs (static publication)
-- [ ] Production build contains no secret, localhost, development credential, private path, or hidden user content
+- [x] Production build scanned: no secret, localhost, credential, or private path (guardrail gate plus staged-file scan, 2026-08-10)
 
 A change is done when: committed, pushed, deployed, browser-verified live. Report the URL and the evidence.
