@@ -10,8 +10,12 @@ interface Props {
 
 const { guides, current, label } = Astro.props;
 const sorted = [...guides].sort((a, b) => a.order - b.order);
-const BOX = 172;
+// Shrink the boxes once a track outgrows the frame, so the whole track
+// stays visible without scrolling and the current item is never parked
+// off the right edge on load.
+const BOX = sorted.length > 5 ? 102 : 172;
 const GAP = 10;
+const CHARS = sorted.length > 5 ? 8 : 17;
 const total = sorted.length * BOX + (sorted.length - 1) * GAP;
 const startX = Math.round((760 - total) / 2);
 ---
@@ -55,7 +59,7 @@ const startX = Math.round((760 - total) / 2);
           font-family="var(--font-mono)"
           fill={on ? 'var(--diagram-accent)' : 'var(--diagram-text)'}
         >
-          {g.title.length > 17 ? `${g.title.slice(0, 16)}.` : g.title}
+          {g.title.length > CHARS ? `${g.title.slice(0, CHARS - 1)}.` : g.title}
         </text>
       </g>
     );
