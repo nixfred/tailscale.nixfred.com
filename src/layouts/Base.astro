@@ -45,6 +45,11 @@ const canonical = canonicalUrl(Astro.url.pathname, Astro.site);
         silently swallowed them and shipped dead icon links that only
         CI's fresh checkout caught. */}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {/* Rasters generated 2026-08-10 FROM the same SVG (rendered in a
+        browser at 180px, then sips to 32px) so the mark cannot drift.
+        Verified not caught by any gitignore rule before committing. */}
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />

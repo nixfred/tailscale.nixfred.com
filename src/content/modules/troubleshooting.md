@@ -90,6 +90,7 @@ Variants matter because they test different layers of the receiving host: defaul
 
 > [!HOW-IT-WORKS] The reason DERP answers first is architectural, not incidental. Every node keeps an authenticated connection to its home DERP region as part of normal operation, so the relay path exists before any probe. Direct paths are discovered lazily via endpoint exchange and simultaneous UDP transmissions. `tailscale ping` simply makes this ordinary upgrade sequence visible and timed.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 300" role="img" aria-label="Sequence of tailscale ping: first replies via DERP relay, then path upgrades to direct UDP">
   <title>tailscale ping path upgrade sequence</title>
   <rect x="20" y="20" width="120" height="40" rx="6" fill="var(--diagram-bg)" stroke="var(--diagram-line)"/>
@@ -114,6 +115,7 @@ Variants matter because they test different layers of the receiving host: defaul
   <text x="380" y="237" text-anchor="middle" fill="var(--diagram-text)" font-size="12">direct path: pong via 203.0.113.7:41641</text>
   <text x="380" y="272" text-anchor="middle" fill="var(--diagram-text)" font-size="12">--until-direct stops here: best case proven</text>
 </svg>
+</div>
 
 ### tailscale netcheck: your side of the story
 
@@ -231,6 +233,7 @@ Read that last block as a sentence: this node lives in DERP region 1, has no act
 
 The taxonomy. Six symptoms cover nearly every ticket. For each: the first three commands, and what each result rules out. The discipline is always the same: run the three, then decide, never the other way around.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 780 360" role="img" aria-label="Triage flow from symptom through three diagnostic commands to isolated layer">
   <title>Symptom triage flow: each command eliminates a layer</title>
   <rect x="20" y="150" width="130" height="50" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-accent)"/>
@@ -260,6 +263,7 @@ The taxonomy. Six symptoms cover nearly every ticket. For each: the first three 
   <line x1="380" y1="175" x2="470" y2="175" stroke="var(--diagram-line)"/>
   <line x1="380" y1="285" x2="470" y2="285" stroke="var(--diagram-line)"/>
 </svg>
+</div>
 
 1. **Cannot connect at all.** No peer is reachable by name or IP. First three: `tailscale status` (a daemon error or empty peer list means the problem is local: service down, or control plane unreachable; a normal peer list rules out the local daemon), `tailscale ping <peer>` (any pong, even via DERP, rules out auth and crypto and moves the problem to the OS or application layer), `tailscale netcheck` (UDP false plus unreachable DERPs means this network blocks you outright; healthy netcheck rules out the local network and points at the peer's side). Symptom signature in logs: repeated failures to reach the control server.
 

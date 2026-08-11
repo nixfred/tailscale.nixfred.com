@@ -8,6 +8,8 @@ import { getCollection } from 'astro:content';
 const modules = (await getCollection('modules')).sort(
   (a, b) => a.data.order - b.data.order
 );
+const drills = await getCollection('drills');
+const guides = await getCollection('guides');
 
 type Row = {
   url: string;
@@ -17,9 +19,8 @@ type Row = {
 };
 
 const byUrl = new Map<string, Row>();
-for (const m of modules) {
-  const label = `${String(m.data.module).padStart(2, '0')} ${m.data.title}`;
-  for (const s of m.data.sources) {
+function add(label: string, sources: { url: string; title: string; checked: string }[]) {
+  for (const s of sources) {
     const row = byUrl.get(s.url);
     if (row) {
       row.usedBy.push(label);
@@ -29,7 +30,20 @@ for (const m of modules) {
     }
   }
 }
+for (const m of modules) add(`${String(m.data.module).padStart(2, '0')} ${m.data.title}`, m.data.sources);
+for (const d of drills) add(`drill: ${d.data.slug}`, d.data.sources);
+for (const g of guides) add(`${g.data.track === 'fieldcraft' ? 'craft' : 'lab'}: ${g.data.slug}`, g.data.sources);
 const rows = [...byUrl.values()].sort((a, b) => a.title.localeCompare(b.title));
+
+// Citation load per track, counted from the ledger itself.
+const trackCounts = [
+  { label: 'curriculum', n: rows.filter((r) => r.usedBy.some((u) => /^\d\d /.test(u))).length },
+  { label: 'drills', n: rows.filter((r) => r.usedBy.some((u) => u.startsWith('drill:'))).length },
+  { label: 'fieldcraft', n: rows.filter((r) => r.usedBy.some((u) => u.startsWith('craft:'))).length },
+  { label: 'code lab', n: rows.filter((r) => r.usedBy.some((u) => u.startsWith('lab:'))).length },
+];
+const maxTrack = Math.max(1, ...trackCounts.map((t) => t.n));
+const shared = rows.filter((r) => r.usedBy.length > 1).length;
 ---
 
 <Shell
@@ -48,7 +62,8 @@ const rows = [...byUrl.values()].sort((a, b) => a.title.localeCompare(b.title));
         official pages conflict, the narrowest current claim wins and the
         resolution is noted on this page.
       </p>
-      <svg
+      <div class="diagram-wrap">
+<svg
         class="hierarchy"
         viewBox="0 0 680 250"
         role="img"
@@ -75,6 +90,32 @@ const rows = [...byUrl.values()].sort((a, b) => a.title.localeCompare(b.title));
         <text x="468" y="136" fill="var(--diagram-accent)" font-size="12" font-family="var(--font-mono)">leads to investigate,</text>
         <text x="468" y="156" fill="var(--diagram-accent)" font-size="12" font-family="var(--font-mono)">never citations</text>
       </svg>
+</div>
+
+      <div class="diagram-wrap">
+<svg
+        class="hierarchy load"
+        viewBox="0 0 680 210"
+        role="img"
+        aria-label={`Citation load by track: ${trackCounts.map((t) => `${t.label} ${t.n}`).join(', ')}. ${shared} sources are cited by more than one page.`}
+      >
+        <title>How the ledger is distributed across the tracks</title>
+        {trackCounts.map((t, i) => {
+          const y = 18 + i * 40;
+          const w = Math.max(4, Math.round((t.n / maxTrack) * 420));
+          return (
+            <g>
+              <text x="16" y={y + 20} font-size="12" font-family="var(--font-mono)" fill="var(--diagram-text)">{t.label}</text>
+              <rect x="120" y={y + 6} width={w} height="18" rx="4" fill="var(--diagram-accent)" opacity="0.85" />
+              <text x={120 + w + 10} y={y + 20} font-size="12" font-family="var(--font-mono)" fill="var(--diagram-text)">{t.n}</text>
+            </g>
+          );
+        })}
+        <text x="16" y="192" font-size="11" font-family="var(--font-mono)" fill="var(--diagram-text)" opacity="0.75">
+          {`${rows.length} distinct sources, ${shared} of them cited by more than one page`}
+        </text>
+      </svg>
+</div>
     </header>
 
     <div class="table-wrap">
@@ -121,6 +162,10 @@ const rows = [...byUrl.values()].sort((a, b) => a.title.localeCompare(b.title));
     font-size: var(--text-lg);
     color: var(--text-muted);
     max-width: 62ch;
+  }
+
+  .load {
+    margin-top: var(--space-3);
   }
 
   .hierarchy {

@@ -135,6 +135,7 @@ Endpoint discovery and sharing rides the same rails. Each node continuously prob
 
 The failure mode: a stale netmap. If a node's control connection is down, it keeps operating on the last netmap it received. Peers that moved to new endpoints since then may become unreachable directly (though relays can mask this), newly added peers do not exist as far as this node is concerned, and revoked peers are still trusted. Staleness is invisible until you look for it, which is why the On the wire section shows you how to look.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 420" role="img" aria-label="Sequence of node registration and netmap distribution between a new node, the coordination server, and an existing peer">
   <title>Node registration and netmap distribution</title>
   <line x1="120" y1="60" x2="120" y2="390" stroke="var(--diagram-line)" stroke-width="1.5"/>
@@ -160,6 +161,7 @@ The failure mode: a stale netmap. If a node's control connection is down, it kee
   <rect x="70" y="355" width="620" height="28" rx="6" fill="var(--diagram-bg)" stroke="var(--diagram-line)"/>
   <text x="380" y="374" text-anchor="middle" fill="var(--diagram-text)" font-size="11">private keys never leave node-a or node-b</text>
 </svg>
+</div>
 
 ### Key expiry and rotation
 
@@ -226,6 +228,7 @@ The mechanism behind the gradual decay: each node's key has its own expiry times
 
 The failure mode worth designing for is not the outage itself but the freeze: during an outage your network is exactly as good, and exactly as bad, as its last-distributed state. Whatever access existed when control vanished is the access you live with until it returns. This cuts both ways: resilient (nothing breaks) and rigid (nothing can be fixed).
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 340" role="img" aria-label="State of a tailnet during a control plane outage: mesh data plane continues, control functions frozen">
   <title>Control plane outage: what freezes and what flows</title>
   <rect x="290" y="20" width="180" height="46" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-line)" stroke-dasharray="6 4"/>
@@ -249,6 +252,7 @@ The failure mode worth designing for is not the outage itself but the freeze: du
   <rect x="120" y="285" width="520" height="34" rx="6" fill="var(--diagram-bg)" stroke="var(--diagram-line)"/>
   <text x="380" y="307" text-anchor="middle" fill="var(--diagram-text)" font-size="11">frozen: joins, policy edits, revocations, key rotation, new peers</text>
 </svg>
+</div>
 
 ### Headscale, in one paragraph
 

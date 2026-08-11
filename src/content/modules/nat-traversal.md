@@ -102,6 +102,7 @@ Now compose the pieces into what actually happens when `node-a` first sends traf
 5. Probes that complete a round trip mark a working path. Since v0.100.0, Tailscale scores working paths by measured round-trip latency rather than a hardcoded category preference, which naturally lands on LAN over WAN over WAN-plus-NAT ordering without hardcoding it.
 6. The connection transparently upgrades to the best working path, usually within a few seconds. Keepalive traffic maintains the NAT state on the chosen path from then on.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 400" role="img" aria-label="Sequence of NAT traversal between two nodes: STUN discovery, endpoint exchange over DERP, simultaneous UDP probes, direct path established">
   <title>UDP hole punching sequence between node-a and node-b</title>
   <rect x="20" y="40" width="130" height="46" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-line)"/>
@@ -132,6 +133,7 @@ Now compose the pieces into what actually happens when `node-a` first sends traf
   <text x="380" y="290" text-anchor="middle" fill="var(--diagram-text)" font-size="13">4. direct WireGuard path, latency-scored</text>
   <text x="380" y="330" text-anchor="middle" fill="var(--diagram-text)" font-size="13">5. keepalives hold NAT state open; DERP stays as fallback</text>
 </svg>
+</div>
 
 ### Hard NATs and the birthday paradox
 
@@ -177,6 +179,7 @@ Path migration is the same machinery pointed at change. Roam from Wi-Fi to a pho
 
 > [!ON-THE-WIRE] You can watch an upgrade happen with `tailscale ping node-b`: the first pong or two typically report `via DERP(region)`, then a pong reports `via ip:port` and the latency drops. The `--until-direct` flag, which defaults to true, stops the ping loop once a direct path is established, which makes it a fine scripted traversal test.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 300" role="img" aria-label="State flow of Tailscale path selection: start on DERP, upgrade to direct, fall back through peer relay to DERP on failure">
   <title>Path selection and fallback order</title>
   <rect x="30" y="110" width="170" height="60" rx="10" fill="var(--diagram-bg)" stroke="var(--diagram-line)"/>
@@ -207,6 +210,7 @@ Path migration is the same machinery pointed at change. Roam from Wi-Fi to a pho
   <polygon points="472,56 482,52 484,63" fill="var(--diagram-accent)"/>
   <text x="558" y="66" fill="var(--diagram-text)" font-size="12">periodic re-check, upgrade</text>
 </svg>
+</div>
 
 ### Peer Relays: bring your own middle
 

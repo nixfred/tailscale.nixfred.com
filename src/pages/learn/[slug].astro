@@ -3,6 +3,7 @@
 // collection, with its sources block and prev/next navigation.
 import Shell from '../../layouts/Shell.astro';
 import { getCollection, render } from 'astro:content';
+import CurriculumRail from '../../components/CurriculumRail.astro';
 
 export async function getStaticPaths() {
   const modules = await getCollection('modules');
@@ -35,6 +36,11 @@ const minutes = entry.data.words
       <h1>{entry.data.title}</h1>
       <p class="lede">{entry.data.description}</p>
     </header>
+
+    <CurriculumRail
+      current={entry.data.module}
+      modules={all.map((m) => ({ module: m.data.module, title: m.data.title }))}
+    />
 
     <article class="prose">
       <Content />

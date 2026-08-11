@@ -1,0 +1,84 @@
+---
+// Track rail: the guides in one track, in order, current one marked.
+// Used on fieldcraft and code lab pages so a reader always knows the
+// shape of the track they are inside.
+interface Props {
+  guides: { slug: string; title: string; order: number }[];
+  current: string;
+  label: string;
+}
+
+const { guides, current, label } = Astro.props;
+const sorted = [...guides].sort((a, b) => a.order - b.order);
+const BOX = 172;
+const GAP = 10;
+const total = sorted.length * BOX + (sorted.length - 1) * GAP;
+const startX = Math.round((760 - total) / 2);
+---
+
+<div class="diagram-wrap">
+<svg
+  class="trackrail"
+  viewBox="0 0 760 96"
+  role="img"
+  aria-label={`${label} track: ${sorted.map((g) => g.title).join(', ')}. Current page is ${sorted.find((g) => g.slug === current)?.title ?? current}.`}
+>
+  <title>{`Position in the ${label} track`}</title>
+  {sorted.map((g, i) => {
+    const x = startX + i * (BOX + GAP);
+    const on = g.slug === current;
+    return (
+      <g>
+        <rect
+          x={x}
+          y="24"
+          width={BOX}
+          height="48"
+          rx="8"
+          fill="var(--diagram-bg)"
+          stroke={on ? 'var(--diagram-accent)' : 'var(--diagram-line)'}
+          stroke-width={on ? '2.5' : '1.5'}
+        />
+        <text
+          x={x + 12}
+          y="53"
+          font-size="12"
+          font-family="var(--font-mono)"
+          fill="var(--diagram-accent)"
+        >
+          {String(g.order).padStart(2, '0')}
+        </text>
+        <text
+          x={x + 38}
+          y="53"
+          font-size="12"
+          font-family="var(--font-mono)"
+          fill={on ? 'var(--diagram-accent)' : 'var(--diagram-text)'}
+        >
+          {g.title.length > 17 ? `${g.title.slice(0, 16)}.` : g.title}
+        </text>
+      </g>
+    );
+  })}
+  {sorted.length > 1 && (
+    <g stroke="var(--diagram-line)" stroke-width="1.5">
+      {sorted.slice(1).map((g, i) => {
+        const x = startX + (i + 1) * (BOX + GAP);
+        return <line x1={x - GAP} y1="48" x2={x} y2="48" />;
+      })}
+    </g>
+  )}
+</svg>
+</div>
+
+<style>
+  .trackrail {
+    width: 100%;
+    max-width: 800px;
+    background: var(--diagram-bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: var(--space-2);
+    margin-bottom: var(--space-5);
+  }
+</style>

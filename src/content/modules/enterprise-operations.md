@@ -111,6 +111,7 @@ Both log types stream to external destinations: SIEMs (Splunk via HTTP Event Col
 
 The reasoning is retention and correlation. Tailscale holds audit logs 90 days and flow logs 30. Your SIEM is where tailnet events get joined against everything else you log, and your bucket is where they live for seven years if your auditor says so.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 720 300" role="img" aria-label="Log pipeline from tailnet events through log types to streaming destinations">
   <title>Tailnet log pipeline: sources, log types, destinations</title>
   <rect x="20" y="40" width="150" height="50" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-line)"/>
@@ -137,6 +138,7 @@ The reasoning is retention and correlation. Tailscale holds audit logs 90 days a
   <line x1="450" y1="225" x2="550" y2="235" stroke="var(--diagram-accent)"/>
   <text x="500" y="30" text-anchor="middle" fill="var(--diagram-text)" font-size="11">stream (Premium+)</text>
 </svg>
+</div>
 
 ### SCIM: the IdP owns the user lifecycle
 
@@ -176,6 +178,7 @@ Recovery and disablement: initialization generates ten disablement secrets, long
 
 Failure mode: treating signing nodes as ordinary infrastructure. If all your signing nodes are laptops that get rebuilt, or VMs in one account that gets deleted, you can reach a state where no trusted TLK exists to sign anything new, and your only exit is a disablement secret. Treat signing nodes like offline CA material: few, durable, documented.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 720 330" role="img" aria-label="Tailnet Lock sequence showing a signed key accepted and an unsigned injected key rejected">
   <title>Tailnet Lock: signature check defeats a compromised control plane</title>
   <rect x="20" y="30" width="140" height="46" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-line)"/>
@@ -198,6 +201,7 @@ Failure mode: treating signing nodes as ordinary infrastructure. If all your sig
   <text x="630" y="265" text-anchor="end" fill="var(--diagram-text)" font-size="12">verify sig: FAIL, key rejected</text>
   <text x="630" y="285" text-anchor="end" fill="var(--diagram-text)" font-size="12">no WireGuard session formed</text>
 </svg>
+</div>
 
 ### The public API and GitOps for the policy file
 
@@ -211,6 +215,7 @@ Why this matters is the same reason network teams left "configure the router by 
 
 Failure mode: scoping the pipeline credential too broadly. A CI system holding a full-permission API token is a tailnet-wide compromise waiting on one leaked secret. Scope the OAuth client to policy file access, nothing else.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 720 310" role="img" aria-label="GitOps flow for the tailnet policy file showing one-directional sync and console edits being overwritten">
   <title>gitops-acl workflow: test on PR, apply on merge, console edits overwritten</title>
   <rect x="20" y="30" width="130" height="50" rx="8" fill="var(--diagram-bg)" stroke="var(--diagram-line)"/>
@@ -240,6 +245,7 @@ Failure mode: scoping the pipeline credential too broadly. A CI system holding a
   <text x="640" y="230" text-anchor="middle" fill="var(--diagram-text)" font-size="11">next apply</text>
   <line x1="535" y1="130" x2="535" y2="80" stroke="var(--diagram-accent)"/>
 </svg>
+</div>
 
 ### Aperture: the tailnet identity layer, pointed at AI
 

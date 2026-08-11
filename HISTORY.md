@@ -60,3 +60,37 @@ banned word metaphorically and was reworded. The curriculum now stands
 complete: thirteen modules, 00 through 12, roughly 56,000 words,
 94 deduplicated ledger sources, every page carrying token built SVG
 diagrams.
+
+---
+
+## Chapter 4: The craft tracks, and a session limit
+### 2026-08-10, late
+
+Twenty six agents went out to write fifteen drills, four fieldcraft
+guides, and four code lab guides. Eighteen came back. The session hit
+its usage limit partway through the verification phase, killing every
+drill verifier and three guide verifiers, and because each item runs
+its stages as a chain, the dead verify stage dropped all fifteen
+drills to null in the returned result. The workflow reported drills as
+an empty set.
+
+They were not lost. Every draft had already been journaled, so the
+recovery was to read the run journal, pull the fifteen drill drafts and
+the three unverified guide drafts straight out of it, and reconcile
+against the verified copies where those existed. Nothing was rewritten.
+
+What the missing verifiers would have caught, the gates caught instead.
+One guide draft carried a line of chatter above its frontmatter, which
+the schema rejected outright. One drill used a system path containing
+/Users, which the guardrail gate blocks without exception; rather than
+loosen the gate for a path that happens to be harmless, the evidence was
+rewritten to a scenario that needs no such path and teaches the same
+lesson. Two drills used a lowercase customer. Fresh agents then took the
+unverified files for a real fact check against current official sources.
+
+The graphics work landed in the same pass, on Fred's instruction that
+every page carry more diagrams. Three of them are generated rather than
+drawn: a curriculum rail on module pages, a coverage map with real per
+area counts on drill pages, and a track rail on guide pages. The rule
+recorded with them (DECISIONS 0009) is that no number inside any graphic
+on this site is ever typed by hand.

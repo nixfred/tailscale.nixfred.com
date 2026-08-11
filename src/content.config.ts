@@ -30,4 +30,31 @@ const modules = defineCollection({
   }),
 });
 
-export const collections = { modules };
+const drills = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/drills' }),
+  schema: z.object({
+    slug: z.string(),
+    title: z.string(),
+    description: z.string(),
+    area: z.enum(['connectivity', 'identity', 'policy', 'dns', 'routing', 'platform']),
+    difficulty: z.number().int().min(1).max(3),
+    symptom: z.string(),
+    words: z.number().optional(),
+    sources: z.array(sourceEntry).min(1),
+  }),
+});
+
+const guides = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/guides' }),
+  schema: z.object({
+    slug: z.string(),
+    title: z.string(),
+    description: z.string(),
+    track: z.enum(['fieldcraft', 'code-lab']),
+    order: z.number(),
+    words: z.number().optional(),
+    sources: z.array(sourceEntry).min(1),
+  }),
+});
+
+export const collections = { modules, drills, guides };

@@ -1,6 +1,8 @@
 # Risk register. tailscale.nixfred.com
 
 1. **Product velocity vs staleness.** Tailscale ships monthly; stale claims are worse than absent ones. Mitigation: sources ledger with review dates, rendered staleness flags, changelog pass every content phase.
-2. **Trademark exposure.** The site uses the Tailscale name heavily. Mitigation: nominative use only, no logo or brand imitation, unofficial disclosure line sitewide, DECISIONS 0006.
+2. **Trademark exposure.** The site uses the Tailscale name heavily and, since DECISIONS 0007, the official wordmark on the homepage. Mitigation: nominative use only; the mark is the unmodified asset from Tailscale's own press kit, self hosted, captioned with ownership attribution; the site design imitates none of their visual identity; the unofficial disclosure line renders sitewide.
 3. **Tailnet privacy leak.** Lab writeups derive from a real tailnet. Mitigation: sanitize before commit (site rule 2), guardrail gate, full-history scan discipline.
 4. **Depth debt.** 110+ page target with a solo author. Mitigation: phased releases, no placeholder routes, in-progress state authored honestly.
+5. **Illustrative operating system internals in drills.** Some drills quote log output from OS subsystems rather than from Tailscale itself (macOS sysextd and nesessionmanager lines, for example). These are not Tailscale product claims and have no official Tailscale source; they illustrate the mechanism the drill teaches. Mitigation: they are confined to constructed scenarios, never presented as documented product behavior, and the surrounding product claims are separately sourced. Flagged during verification 2026-08-10.
+6. **Customer version matrices are deliberately behind current.** Drills cite client versions older than the current release because Customers genuinely run behind. No drill presents a cited version as the latest release; verified by grep 2026-08-10.

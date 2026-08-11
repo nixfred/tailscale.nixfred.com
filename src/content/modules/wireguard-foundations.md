@@ -84,6 +84,7 @@ One round trip. Compare that with the multi round trip negotiation of IKEv2 or T
 
 > [!HOW-IT-WORKS] The handshake gives you forward secrecy on a rolling basis. Session keys are derived from ephemeral keys that are thrown away, so compromising a node's static private key later does not decrypt captured traffic from old sessions. The static keys authenticate; the ephemerals encrypt.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 760 420" role="img" aria-label="Noise IK handshake sequence between initiator and responder, followed by transport data and the 120 second rekey loop">
   <title>Noise IK handshake and rekey cycle</title>
   <line x1="140" y1="60" x2="140" y2="390" stroke="var(--diagram-line)" stroke-width="2"/>
@@ -112,6 +113,7 @@ One round trip. Compare that with the multi round trip negotiation of IKEv2 or T
   <polygon points="620,375 606,369 606,381" fill="var(--diagram-accent)"/>
   <text x="380" y="365" text-anchor="middle" fill="var(--diagram-text)" font-size="13">new msg 1: rekey (fresh ephemerals, new session)</text>
 </svg>
+</div>
 
 **Failure mode.** The handshake fails invisibly by design. If the responder does not recognize the initiator's static key (stale peer config, rotated key, wrong tailnet), it sends nothing back. From the initiator's side this looks identical to a firewall drop: retries every 5 seconds, no error message. Diagnosing "no handshake response" therefore always has two hypotheses, crypto identity mismatch and packet loss, and you cannot distinguish them from the initiator alone. Clock skew is the sneakier variant: because the initiation carries a monotonic timestamp, a node whose clock jumps backward (a restored VM snapshot is the classic case) will emit initiations the responder silently discards as replays until the clock catches up to the last accepted timestamp.
 
@@ -140,6 +142,7 @@ Roaming falls out of the same table. A peer's endpoint (outer IP and port) is no
 
 > [!GOTCHA] Allowed IPs lists must not overlap ambiguously between peers on the same interface: a given inner IP can belong to only one peer, because the outbound lookup needs exactly one answer. In raw WireGuard, misassigning a subnet to the wrong peer silently blackholes traffic to it. Tailscale generates these tables for you from the coordination server's netmap, which is precisely how it removes this class of foot-gun.
 
+<div class="diagram-wrap">
 <svg viewBox="0 0 780 400" role="img" aria-label="Cryptokey routing table on node-a used in both directions: destination lookup for outbound encryption and source check for inbound acceptance">
   <title>Cryptokey routing: one table, two directions</title>
   <rect x="270" y="30" width="240" height="150" fill="var(--diagram-bg)" stroke="var(--diagram-line)" stroke-width="2"/>
@@ -171,6 +174,7 @@ Roaming falls out of the same table. A peer's endpoint (outer IP and port) is no
   <line x1="480" y1="220" x2="600" y2="255" stroke="var(--diagram-line)" stroke-width="2" stroke-dasharray="5 4"/>
   <polygon points="600,255 586,249 590,260" fill="var(--diagram-line)"/>
 </svg>
+</div>
 
 **Failure mode.** Cryptokey routing failures are always silent drops with healthy looking crypto. The three classics: a subnet route pointing at the wrong peer (outbound blackhole), a peer sending from an inner source address outside its allowed IPs (inbound drop after successful decryption, so the sender sees its counters increment while the receiver sees nothing), and two peers configured with the same allowed IP (traffic follows whichever entry the implementation resolves, and the other peer starves). In Tailscale these appear when subnet router advertisements overlap or when a node NATs traffic into the tunnel with the wrong source.
 
