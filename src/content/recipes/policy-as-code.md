@@ -12,15 +12,15 @@ sources:
     title: Syntax reference for the tailnet policy file
     checked: 2026-08-11
   - id: kb-acl-syntax
-    url: https://tailscale.com/kb/1337/acl-syntax
+    url: https://tailscale.com/docs/reference/syntax/policy-file
     title: Tailnet policy file syntax
     checked: 2026-08-11
   - id: kb-gitops
-    url: https://tailscale.com/kb/1204/gitops-acls
+    url: https://tailscale.com/docs/gitops
     title: GitOps for Tailscale
     checked: 2026-08-11
   - id: kb-gitops-github
-    url: https://tailscale.com/kb/1306/gitops-acls-github
+    url: https://tailscale.com/docs/integrations/github/gitops
     title: GitOps for Tailscale with GitHub Actions
     checked: 2026-08-11
   - id: gh-gitops-action
@@ -28,7 +28,7 @@ sources:
     title: tailscale/gitops-acl-action
     checked: 2026-08-11
   - id: kb-edit-policies
-    url: https://tailscale.com/kb/1338/edit-policies
+    url: https://tailscale.com/docs/features/tailnet-policy-file/manage-tailnet-policies
     title: Edit access control policies in your tailnet policy file
     checked: 2026-08-11
   - id: api-tailnet
@@ -36,7 +36,7 @@ sources:
     title: Tailscale API, tailnet endpoints
     checked: 2026-08-11
   - id: kb-oauth
-    url: https://tailscale.com/kb/1215/oauth-clients
+    url: https://tailscale.com/docs/features/oauth-clients
     title: OAuth clients
     checked: 2026-08-11
 ---

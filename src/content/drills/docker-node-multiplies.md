@@ -16,11 +16,11 @@ sources:
     title: Docker configuration parameters
     checked: 2026-08-10
   - id: kb-auth-keys
-    url: https://tailscale.com/kb/1085/auth-keys
+    url: https://tailscale.com/docs/features/access-control/auth-keys
     title: Auth keys
     checked: 2026-08-10
   - id: kb-ephemeral
-    url: https://tailscale.com/kb/1111/ephemeral-nodes
+    url: https://tailscale.com/docs/features/ephemeral-nodes
     title: Ephemeral nodes
     checked: 2026-08-10
   - id: src-containerboot

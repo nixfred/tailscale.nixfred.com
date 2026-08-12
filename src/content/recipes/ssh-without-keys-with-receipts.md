@@ -8,7 +8,7 @@ order: 4
 words: 1980
 sources:
   - id: kb-ssh
-    url: https://tailscale.com/kb/1193/tailscale-ssh
+    url: https://tailscale.com/docs/features/tailscale-ssh
     title: Tailscale SSH
     checked: 2026-08-11
   - id: docs-ssh
@@ -16,19 +16,19 @@ sources:
     title: Tailscale SSH (Tailscale Docs)
     checked: 2026-08-11
   - id: kb-recording
-    url: https://tailscale.com/kb/1246/tailscale-ssh-session-recording
+    url: https://tailscale.com/docs/features/tailscale-ssh/tailscale-ssh-session-recording
     title: Tailscale SSH session recording
     checked: 2026-08-11
   - id: kb-acl-syntax
-    url: https://tailscale.com/kb/1337/acl-syntax
+    url: https://tailscale.com/docs/reference/syntax/policy-file
     title: Tailnet policy file syntax
     checked: 2026-08-11
   - id: kb-targets
-    url: https://tailscale.com/kb/1396/targets
+    url: https://tailscale.com/docs/reference/targets-and-selectors
     title: Policy file targets and autogroups
     checked: 2026-08-11
   - id: kb-tags
-    url: https://tailscale.com/kb/1068/tags
+    url: https://tailscale.com/docs/features/tags
     title: Tags
     checked: 2026-08-11
   - id: ts-pricing

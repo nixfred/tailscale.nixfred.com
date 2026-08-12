@@ -8,11 +8,11 @@ symptom: "Every time I bring Tailscale up on my Mac it works for about two and a
 words: 1500
 sources:
   - id: kb-macos-variants
-    url: https://tailscale.com/kb/1065/macos-variants
+    url: https://tailscale.com/docs/concepts/macos-variants
     title: Three ways to run Tailscale on macOS
     checked: 2026-08-10
   - id: kb-troubleshooting
-    url: https://tailscale.com/kb/1023/troubleshooting
+    url: https://tailscale.com/docs/reference/troubleshooting
     title: Troubleshooting guide
     checked: 2026-08-10
   - id: docs-debug-menu

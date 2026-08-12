@@ -7,27 +7,27 @@ order: 8
 words: 4400
 sources:
   - id: serve-kb
-    url: https://tailscale.com/kb/1312/serve
+    url: https://tailscale.com/docs/features/tailscale-serve
     title: Tailscale Serve
     checked: 2026-08-10
   - id: serve-cli
-    url: https://tailscale.com/kb/1242/tailscale-serve
+    url: https://tailscale.com/docs/reference/tailscale-cli/serve
     title: tailscale serve command reference
     checked: 2026-08-10
   - id: funnel-kb
-    url: https://tailscale.com/kb/1223/funnel
+    url: https://tailscale.com/docs/features/tailscale-funnel
     title: Tailscale Funnel
     checked: 2026-08-10
   - id: funnel-cli
-    url: https://tailscale.com/kb/1311/tailscale-funnel
+    url: https://tailscale.com/docs/reference/tailscale-cli/funnel
     title: tailscale funnel command reference
     checked: 2026-08-10
   - id: https-certs
-    url: https://tailscale.com/kb/1153/enabling-https
+    url: https://tailscale.com/docs/how-to/set-up-https-certificates
     title: Enabling HTTPS
     checked: 2026-08-10
   - id: services-kb
-    url: https://tailscale.com/kb/1552/tailscale-services
+    url: https://tailscale.com/docs/features/tailscale-services
     title: Tailscale Services
     checked: 2026-08-10
   - id: services-ga
@@ -35,7 +35,7 @@ sources:
     title: Tailscale Services GA announcement
     checked: 2026-08-10
   - id: tsnet-kb
-    url: https://tailscale.com/kb/1244/tsnet
+    url: https://tailscale.com/docs/features/tsnet
     title: tsnet
     checked: 2026-08-10
   - id: tsnet-repo

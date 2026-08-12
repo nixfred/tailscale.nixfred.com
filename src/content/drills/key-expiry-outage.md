@@ -8,19 +8,19 @@ symptom: "Both boxes dropped off at the same minute. That has to be an attack or
 words: 1250
 sources:
   - id: kb-key-expiry
-    url: https://tailscale.com/kb/1028/key-expiry
+    url: https://tailscale.com/docs/features/access-control/key-expiry
     title: Key expiry
     checked: 2026-08-10
   - id: kb-auth-keys
-    url: https://tailscale.com/kb/1085/auth-keys
+    url: https://tailscale.com/docs/features/access-control/auth-keys
     title: Auth keys
     checked: 2026-08-10
   - id: kb-tags
-    url: https://tailscale.com/kb/1068/tags
+    url: https://tailscale.com/docs/features/tags
     title: Group devices with tags
     checked: 2026-08-10
   - id: cli
-    url: https://tailscale.com/kb/1080/cli
+    url: https://tailscale.com/docs/reference/tailscale-cli
     title: Tailscale CLI
     checked: 2026-08-10
   - id: health-source

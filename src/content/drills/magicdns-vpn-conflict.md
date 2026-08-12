@@ -8,15 +8,15 @@ symptom: "Whenever I connect the corp VPN on my Mac, nothing .ts.net resolves. T
 words: 1350
 sources:
   - id: kb-magicdns
-    url: https://tailscale.com/kb/1081/magicdns
+    url: https://tailscale.com/docs/features/magicdns
     title: MagicDNS
     checked: 2026-08-10
   - id: kb-dns
-    url: https://tailscale.com/kb/1054/dns
+    url: https://tailscale.com/docs/reference/dns-in-tailscale
     title: DNS in Tailscale
     checked: 2026-08-10
   - id: kb-quad100
-    url: https://tailscale.com/kb/1381/what-is-quad100
+    url: https://tailscale.com/docs/reference/quad100
     title: What is 100.100.100.100?
     checked: 2026-08-10
   - id: ts-resolve-failure

@@ -7,15 +7,15 @@ order: 1
 words: 3450
 sources:
   - id: kb-troubleshooting
-    url: https://tailscale.com/kb/1023/troubleshooting
+    url: https://tailscale.com/docs/reference/troubleshooting
     title: Troubleshooting guide
     checked: 2026-08-10
   - id: kb-cli
-    url: https://tailscale.com/kb/1080/cli
+    url: https://tailscale.com/docs/reference/tailscale-cli
     title: Tailscale CLI
     checked: 2026-08-10
   - id: kb-logging
-    url: https://tailscale.com/kb/1011/log
+    url: https://tailscale.com/docs/features/logging
     title: Tailscale logging
     checked: 2026-08-10
   - id: docs-bugreport
@@ -23,11 +23,11 @@ sources:
     title: Generate a bug report
     checked: 2026-08-10
   - id: kb-macos-variants
-    url: https://tailscale.com/kb/1065/macos-variants
+    url: https://tailscale.com/docs/concepts/macos-variants
     title: Variants of the macOS client
     checked: 2026-08-10
   - id: kb-client-metrics
-    url: https://tailscale.com/kb/1482/client-metrics
+    url: https://tailscale.com/docs/reference/tailscale-client-metrics
     title: Client metrics
     checked: 2026-08-10
   - id: changelog

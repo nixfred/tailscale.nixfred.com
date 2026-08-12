@@ -7,39 +7,39 @@ order: 10
 words: 4400
 sources:
   - id: audit-logging
-    url: https://tailscale.com/kb/1203/audit-logging
+    url: https://tailscale.com/docs/features/logging/audit-logging
     title: Configuration audit logs
     checked: 2026-08-10
   - id: flow-logs
-    url: https://tailscale.com/kb/1219/network-flow-logs
+    url: https://tailscale.com/docs/features/logging/network-flow-logs
     title: Network flow logs
     checked: 2026-08-10
   - id: log-streaming
-    url: https://tailscale.com/kb/1255/log-streaming
+    url: https://tailscale.com/docs/features/logging/log-streaming
     title: Log streaming
     checked: 2026-08-10
   - id: scim
-    url: https://tailscale.com/kb/1290/user-group-provisioning
+    url: https://tailscale.com/docs/features/user-group-provisioning
     title: User and group provisioning
     checked: 2026-08-10
   - id: user-roles
-    url: https://tailscale.com/kb/1138/user-roles
+    url: https://tailscale.com/docs/reference/user-roles
     title: User roles
     checked: 2026-08-10
   - id: tailnet-lock
-    url: https://tailscale.com/kb/1226/tailnet-lock
+    url: https://tailscale.com/docs/features/tailnet-lock
     title: Tailnet Lock
     checked: 2026-08-10
   - id: device-approval
-    url: https://tailscale.com/kb/1099/device-approval
+    url: https://tailscale.com/docs/features/access-control/device-management/device-approval
     title: Device approval
     checked: 2026-08-10
   - id: api
-    url: https://tailscale.com/kb/1101/api
+    url: https://tailscale.com/docs/reference/tailscale-api
     title: Tailscale API
     checked: 2026-08-10
   - id: gitops
-    url: https://tailscale.com/kb/1204/gitops-acls
+    url: https://tailscale.com/docs/gitops
     title: GitOps for the tailnet policy file
     checked: 2026-08-10
   - id: gitops-github

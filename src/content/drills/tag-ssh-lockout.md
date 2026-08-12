@@ -8,23 +8,23 @@ symptom: "I tagged the machine and SSH died the same second. Ping works, status 
 words: 1450
 sources:
   - id: kb-tags
-    url: https://tailscale.com/kb/1068/tags
+    url: https://tailscale.com/docs/features/tags
     title: Group devices with tags
     checked: 2026-08-10
   - id: kb-tailscale-ssh
-    url: https://tailscale.com/kb/1193/tailscale-ssh
+    url: https://tailscale.com/docs/features/tailscale-ssh
     title: Tailscale SSH
     checked: 2026-08-10
   - id: kb-acl-syntax
-    url: https://tailscale.com/kb/1337/acl-syntax
+    url: https://tailscale.com/docs/reference/syntax/policy-file
     title: Syntax reference for the tailnet policy file
     checked: 2026-08-10
   - id: kb-autogroups
-    url: https://tailscale.com/kb/1396/targets
+    url: https://tailscale.com/docs/reference/targets-and-selectors
     title: Targets and selectors
     checked: 2026-08-10
   - id: cli
-    url: https://tailscale.com/kb/1080/cli
+    url: https://tailscale.com/docs/reference/tailscale-cli
     title: Tailscale CLI
     checked: 2026-08-10
 ---

@@ -25,7 +25,7 @@ Plus labs (`/labs/`): at least 10 exercises actually executed on the author's ow
 
 ## Depth target (Law 12)
 
-110+ pages at completion, benchmarked against haeb.org (105 pages). Modules run 4000 to 6000 words each. No placeholders: routes ship only when their content is real, and in-progress state is authored honestly.
+Coverage rather than page count, per Fred's ruling of 2026-08-12 (DECISIONS 0012): every feature on the official docs sitemap and current changelog has a home here. Modules run 4000 to 6000 words each. No placeholders: routes ship only when their content is real, and in-progress state is authored honestly.
 
 ## Pedagogy
 
@@ -39,7 +39,7 @@ Plus labs (`/labs/`): at least 10 exercises actually executed on the author's ow
 1. Every factual product claim resolves to a sources ledger entry: URL, title, checked date.
 2. Source hierarchy: official docs, then KB, then changelog, then blog, then the open source code itself. Third party writeups are leads, never citations.
 3. Version-qualify claims (client version, OS, plan tier). Conflicts resolve to the narrowest current claim with an editorial note on `/sources/`.
-4. Currency rule: the 2026 surface (Peer Relays GA, Tailscale Services GA, Aperture, workload identity federation) is covered; a changelog review pass is part of every content phase. Claims carry review dates and render a staleness flag when past due.
+4. Currency rule: the 2026 surface (Peer Relays GA, Tailscale Services GA, Aperture, workload identity federation) is covered; a changelog review pass is part of every content phase. Every claim carries a checked date and the schema rejects a sourceless page. There is deliberately no rendered staleness flag (DECISIONS 0013).
 
 ## Stack and architecture
 

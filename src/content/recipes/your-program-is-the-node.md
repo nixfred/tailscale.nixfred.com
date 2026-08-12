@@ -24,7 +24,7 @@ sources:
     title: "tsnet example: tsnet-funnel"
     checked: 2026-08-11
   - id: tsnet-kb
-    url: https://tailscale.com/kb/1244/tsnet
+    url: https://tailscale.com/docs/features/tsnet
     title: Using tsnet (Tailscale docs)
     checked: 2026-08-11
   - id: local-pkg
@@ -44,15 +44,15 @@ sources:
     title: ipnstate package reference (Status)
     checked: 2026-08-11
   - id: authkeys
-    url: https://tailscale.com/kb/1085/auth-keys
+    url: https://tailscale.com/docs/features/access-control/auth-keys
     title: Auth keys (Tailscale docs)
     checked: 2026-08-11
   - id: funnel
-    url: https://tailscale.com/kb/1223/funnel
+    url: https://tailscale.com/docs/features/tailscale-funnel
     title: Tailscale Funnel (Tailscale docs)
     checked: 2026-08-11
   - id: grants-app
-    url: https://tailscale.com/kb/1537/grants-app-capabilities
+    url: https://tailscale.com/docs/features/access-control/grants/grants-app-capabilities
     title: "Grants: application capabilities (Tailscale docs)"
     checked: 2026-08-11
 ---

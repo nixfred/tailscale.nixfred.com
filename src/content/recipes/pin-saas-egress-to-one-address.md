@@ -8,7 +8,7 @@ order: 6
 words: 2010
 sources:
   - id: kb-app-connectors
-    url: https://tailscale.com/kb/1281/app-connectors
+    url: https://tailscale.com/docs/features/app-connectors
     title: App connectors
     checked: 2026-08-11
   - id: docs-app-connectors
@@ -32,7 +32,7 @@ sources:
     title: Syntax reference for the tailnet policy file
     checked: 2026-08-11
   - id: kb-cli
-    url: https://tailscale.com/kb/1080/cli
+    url: https://tailscale.com/docs/reference/tailscale-cli
     title: Tailscale CLI
     checked: 2026-08-11
   - id: blog-saas

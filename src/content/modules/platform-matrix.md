@@ -7,47 +7,47 @@ order: 9
 words: 4400
 sources:
   - id: macos-variants
-    url: https://tailscale.com/kb/1065/macos-variants
+    url: https://tailscale.com/docs/concepts/macos-variants
     title: Variants of the macOS Tailscale client
     checked: 2026-08-10
   - id: tailscaled
-    url: https://tailscale.com/kb/1278/tailscaled
+    url: https://tailscale.com/docs/reference/tailscaled
     title: tailscaled
     checked: 2026-08-10
   - id: cli
-    url: https://tailscale.com/kb/1080/cli
+    url: https://tailscale.com/docs/reference/tailscale-cli
     title: Tailscale CLI
     checked: 2026-08-10
   - id: tailscale-up
-    url: https://tailscale.com/kb/1241/tailscale-up
+    url: https://tailscale.com/docs/reference/tailscale-cli/up
     title: tailscale up command
     checked: 2026-08-10
   - id: auth-keys
-    url: https://tailscale.com/kb/1085/auth-keys
+    url: https://tailscale.com/docs/features/access-control/auth-keys
     title: Auth keys
     checked: 2026-08-10
   - id: run-unattended
-    url: https://tailscale.com/kb/1088/run-unattended
+    url: https://tailscale.com/docs/how-to/run-unattended
     title: Run Tailscale unattended on Windows
     checked: 2026-08-10
   - id: install-windows
-    url: https://tailscale.com/kb/1022/install-windows
+    url: https://tailscale.com/docs/install/windows
     title: Install Tailscale on Windows
     checked: 2026-08-10
   - id: install-ios
-    url: https://tailscale.com/kb/1020/install-ios
+    url: https://tailscale.com/docs/install/ios
     title: Install Tailscale on iOS
     checked: 2026-08-10
   - id: other-vpns
-    url: https://tailscale.com/kb/1105/other-vpns
+    url: https://tailscale.com/docs/reference/faq/other-vpns
     title: Using Tailscale with other VPNs
     checked: 2026-08-10
   - id: install-linux
-    url: https://tailscale.com/kb/1031/install-linux
+    url: https://tailscale.com/docs/install/linux
     title: Install Tailscale on Linux
     checked: 2026-08-10
   - id: docker-quick
-    url: https://tailscale.com/kb/1453/quick-guide-docker
+    url: https://tailscale.com/docs/features/containers/docker/how-to/connect-docker-container
     title: Quick guide to Tailscale on Docker
     checked: 2026-08-10
   - id: docker-params
@@ -59,15 +59,15 @@ sources:
     title: Install the Tailscale Kubernetes Operator
     checked: 2026-08-10
   - id: k8s-apiserver
-    url: https://tailscale.com/kb/1437/kubernetes-operator-api-server-proxy
+    url: https://tailscale.com/docs/kubernetes-operator/api-server-access
     title: Access the Kubernetes control plane using an API server proxy
     checked: 2026-08-10
   - id: k8s-customization
-    url: https://tailscale.com/kb/1445/kubernetes-operator-customization
+    url: https://tailscale.com/docs/kubernetes-operator/manage-and-configure
     title: Customize the Kubernetes operator and resources it manages
     checked: 2026-08-10
   - id: synology
-    url: https://tailscale.com/kb/1131/synology
+    url: https://tailscale.com/docs/integrations/synology
     title: Install Tailscale on Synology
     checked: 2026-08-10
 ---

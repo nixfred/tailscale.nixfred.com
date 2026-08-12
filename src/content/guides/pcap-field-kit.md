@@ -7,7 +7,7 @@ order: 4
 words: 3600
 sources:
   - id: kb-firewall-ports
-    url: https://tailscale.com/kb/1082/firewall-ports
+    url: https://tailscale.com/docs/reference/faq/firewall-ports
     title: What firewall ports should I open to use Tailscale?
     checked: 2026-08-10
   - id: wg-protocol
@@ -15,7 +15,7 @@ sources:
     title: WireGuard Protocol and Cryptography
     checked: 2026-08-10
   - id: kb-derp
-    url: https://tailscale.com/kb/1232/derp-servers
+    url: https://tailscale.com/docs/reference/derp-servers
     title: DERP servers
     checked: 2026-08-10
   - id: blog-nat-traversal
@@ -23,11 +23,11 @@ sources:
     title: How NAT traversal works
     checked: 2026-08-10
   - id: kb-cli
-    url: https://tailscale.com/kb/1080/cli
+    url: https://tailscale.com/docs/reference/tailscale-cli
     title: Tailscale CLI
     checked: 2026-08-10
   - id: kb-100x
-    url: https://tailscale.com/kb/1015/100.x-addresses
+    url: https://tailscale.com/docs/concepts/tailscale-ip-addresses
     title: What are these 100.x.y.z addresses?
     checked: 2026-08-10
   - id: wg-go-constants

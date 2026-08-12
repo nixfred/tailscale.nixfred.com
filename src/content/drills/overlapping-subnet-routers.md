@@ -8,15 +8,15 @@ symptom: "Sometimes ssh to 192.168.1.10 gets the office NAS, sometimes it gets a
 words: 1500
 sources:
   - id: kb-subnets
-    url: https://tailscale.com/kb/1019/subnets
+    url: https://tailscale.com/docs/features/subnet-routers
     title: Subnet routers
     checked: 2026-08-10
   - id: kb-4via6
-    url: https://tailscale.com/kb/1201/4via6-subnets
+    url: https://tailscale.com/docs/features/subnet-routers/4via6-subnets
     title: 4via6 subnet routers
     checked: 2026-08-10
   - id: kb-ha
-    url: https://tailscale.com/kb/1115/high-availability
+    url: https://tailscale.com/docs/how-to/set-up-high-availability
     title: Set up high availability
     checked: 2026-08-10
 ---

@@ -11,19 +11,19 @@ sources:
     title: How Tailscale works
     checked: 2026-08-10
   - id: auth-keys
-    url: https://tailscale.com/kb/1085/auth-keys
+    url: https://tailscale.com/docs/features/access-control/auth-keys
     title: Auth keys
     checked: 2026-08-10
   - id: key-expiry
-    url: https://tailscale.com/kb/1028/key-expiry
+    url: https://tailscale.com/docs/features/access-control/key-expiry
     title: Key expiry
     checked: 2026-08-10
   - id: acls
-    url: https://tailscale.com/kb/1018/acls
+    url: https://tailscale.com/docs/features/access-control/acls
     title: Manage permissions using ACLs (tailnet policy file)
     checked: 2026-08-10
   - id: tags
-    url: https://tailscale.com/kb/1068/tags
+    url: https://tailscale.com/docs/features/tags
     title: Tags
     checked: 2026-08-10
   - id: control-data-planes
@@ -35,7 +35,7 @@ sources:
     title: What happens if the coordination server is down?
     checked: 2026-08-10
   - id: peer-relays
-    url: https://tailscale.com/kb/1591/peer-relays
+    url: https://tailscale.com/docs/features/peer-relay
     title: Peer relays
     checked: 2026-08-10
   - id: opensource

@@ -49,3 +49,21 @@ Fifteen drills across six failure areas, four fieldcraft guides, and four code l
 Fred's instruction: show the cool things a tailnet makes possible, five to seven of them, two drawn from how he actually runs his own network and the rest researched. Recipes are a distinct content type from drills: a drill investigates a failure, a recipe builds a capability. Fixed section order (what you get, how it works, build it, verify it, gotchas, where to take it next) with a level of intermediate or advanced and a one line payoff.
 
 The two from the author's own use are published with the specific traps that were paid for in real time, because that is what makes them worth more than the documentation: a host firewall whose enablement does not survive a reboot on one platform, reporting healthy while zero rules are loaded, and a machine whose system hostname disagreed with the name that resolves on the tailnet, in a tool that used one string for both the self check and the SSH target. Hostnames and provider names are genericized per site rule 2.
+
+## 0012, 2026-08-12, Fred: depth is measured by coverage, not by page count
+
+Fred's ruling: "you dont have to have 100 pages, if you have covered everything you need to cover."
+
+FACTORY OVERRIDE of LAWS.md Law 12, which requires a numeric page target benchmarked against a sibling site. Law 12 exists to stop thin sites, and its real requirement is that depth be measurable rather than a vibe. So the target is replaced, not deleted: every feature on the official documentation sitemap and the current changelog must have a home on this site, tracked as a checklist with a percentage. That is still a number, and it is a better number, because 110 pages of thin reference would satisfy the old target while failing the actual goal.
+
+## 0013, 2026-08-12, Fred: the PRD stops promising a staleness flag
+
+The hardened PRD committed to rendering a staleness flag when a source passed its review date. That was never built, and Fred's ruling is that the PRD was a document to get the build moving rather than a contract to satisfy line by line: "PRD was to get it going and I feel like its close."
+
+The promise is therefore removed from the PRD instead of being quietly carried as an unmet commitment. What remains true and is still enforced: every source carries a checked date, the schema rejects a sourceless page, and currency is maintained by a changelog review pass during content work. A document that claims a mechanism the site does not have is worse than one that describes the site honestly.
+
+## 0014, 2026-08-12: knowledge base citations migrated to canonical docs URLs
+
+Tailscale moved its knowledge base from `/kb/NNNN/slug` to `/docs/...` and answers the old paths with a 308. Citing both shapes for the same page is sloppy on a site whose job is provenance, so all 72 old citations were rewritten in one pass by following each redirect rather than guessing the target, and every resulting URL was verified to answer 200 directly.
+
+Checked dates were not restamped. A checked date records when a claim was verified against the content of a page, and resolving a URL is not that. Restamping would have inflated 155 sources with a freshness they had not earned.

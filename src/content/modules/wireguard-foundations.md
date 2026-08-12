@@ -35,11 +35,11 @@ sources:
     title: Tailscale Peer Relays (Tailscale docs)
     checked: 2026-08-10
   - id: ts-userspace
-    url: https://tailscale.com/kb/1112/userspace-networking
+    url: https://tailscale.com/docs/concepts/userspace-networking
     title: Userspace networking mode (Tailscale docs)
     checked: 2026-08-10
   - id: ts-cgnat
-    url: https://tailscale.com/kb/1015/100.x-addresses
+    url: https://tailscale.com/docs/concepts/tailscale-ip-addresses
     title: What are these 100.x.y.z addresses? (Tailscale docs)
     checked: 2026-08-10
 ---

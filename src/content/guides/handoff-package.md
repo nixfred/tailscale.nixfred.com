@@ -11,15 +11,15 @@ sources:
     title: Generate a bug report
     checked: 2026-08-10
   - id: cli
-    url: https://tailscale.com/kb/1080/cli
+    url: https://tailscale.com/docs/reference/tailscale-cli
     title: Tailscale CLI
     checked: 2026-08-10
   - id: derp
-    url: https://tailscale.com/kb/1232/derp-servers
+    url: https://tailscale.com/docs/reference/derp-servers
     title: DERP servers
     checked: 2026-08-10
   - id: connection-types
-    url: https://tailscale.com/kb/1257/connection-types
+    url: https://tailscale.com/docs/reference/connection-types
     title: Connection types
     checked: 2026-08-10
 ---

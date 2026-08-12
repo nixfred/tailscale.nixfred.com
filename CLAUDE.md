@@ -29,7 +29,7 @@ An unofficial Tailscale field guide and lab notebook: how the mesh actually work
 | **Output dir** | dist/ |
 | **Deploy** | push to main deploys via Actions; ./deploy.sh is the escape hatch |
 | **Mission** | Mechanism-first Tailscale mastery, every claim sourced |
-| **Depth target** | 110+ pages at completion, benchmarked against haeb.org (105) |
+| **Depth target** | Coverage, not page count. FACTORY OVERRIDE of Law 12 (Fred, 2026-08-12, DECISIONS 0012): every feature on the official docs sitemap and current changelog has a home here, tracked as a checklist percentage. |
 | **Motion direction** | restrained, functional only |
 | **External dependencies** | none |
 | **Freshness target** | source entries re-checked when cited content changes; staleness flags planned with the encyclopedia |

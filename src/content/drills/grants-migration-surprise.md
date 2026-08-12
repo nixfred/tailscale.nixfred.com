@@ -8,15 +8,15 @@ symptom: "Since the ACL migration, https://billing.velvet-lizard.ts.net times ou
 words: 1400
 sources:
   - id: kb-grants
-    url: https://tailscale.com/kb/1324/grants
+    url: https://tailscale.com/docs/features/access-control/grants
     title: Grants
     checked: 2026-08-10
   - id: kb-acl-syntax
-    url: https://tailscale.com/kb/1337/acl-syntax
+    url: https://tailscale.com/docs/reference/syntax/policy-file
     title: Syntax reference for the tailnet policy file
     checked: 2026-08-10
   - id: kb-services
-    url: https://tailscale.com/kb/1552/tailscale-services
+    url: https://tailscale.com/docs/features/tailscale-services
     title: Tailscale Services
     checked: 2026-08-10
 ---
