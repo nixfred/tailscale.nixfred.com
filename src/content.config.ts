@@ -5,16 +5,18 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+// YAML parses a bare 2026-08-10 as a Date, so any date-shaped field has to
+// be normalized back to the YYYY-MM-DD string the templates render.
+const isoDate = z.preprocess(
+  (v) => (v instanceof Date ? v.toISOString().slice(0, 10) : v),
+  z.string().regex(/^\d{4}-\d{2}-\d{2}$/)
+);
+
 const sourceEntry = z.object({
   id: z.string(),
   url: z.string().url(),
   title: z.string(),
-  // YAML parses a bare 2026-08-10 as a Date; normalize back to the
-  // YYYY-MM-DD string the templates render.
-  checked: z.preprocess(
-    (v) => (v instanceof Date ? v.toISOString().slice(0, 10) : v),
-    z.string().regex(/^\d{4}-\d{2}-\d{2}$/)
-  ),
+  checked: isoDate,
 });
 
 const modules = defineCollection({
@@ -71,4 +73,18 @@ const recipes = defineCollection({
   }),
 });
 
-export const collections = { modules, drills, guides, recipes };
+const labs = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/labs' }),
+  schema: z.object({
+    slug: z.string(),
+    title: z.string(),
+    description: z.string(),
+    order: z.number(),
+    disruptive: z.boolean(),
+    ran: isoDate,
+    words: z.number().optional(),
+    sources: z.array(sourceEntry).min(1),
+  }),
+});
+
+export const collections = { modules, drills, guides, recipes, labs };

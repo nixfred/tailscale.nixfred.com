@@ -10,11 +10,13 @@ const modules = (await getCollection('modules')).sort(
 const drills = await getCollection('drills');
 const guides = await getCollection('guides');
 const recipes = await getCollection('recipes');
+const labs = await getCollection('labs');
 const totalWords =
   modules.reduce((n, m) => n + (m.data.words ?? 0), 0) +
   drills.reduce((n, d) => n + (d.data.words ?? 0), 0) +
   guides.reduce((n, g) => n + (g.data.words ?? 0), 0) +
-  recipes.reduce((n, r) => n + (r.data.words ?? 0), 0);
+  recipes.reduce((n, r) => n + (r.data.words ?? 0), 0) +
+  labs.reduce((n, l) => n + (l.data.words ?? 0), 0);
 ---
 
 <Shell
@@ -130,6 +132,11 @@ const totalWords =
           machines that enroll themselves, services published without opening
           a port, keyless SSH that keeps receipts, and programs that are
           tailnet members in their own right.
+        </li>
+        <li>
+          <strong><a href="/labs">Labs.</a></strong> Exercises run against a
+          real multi machine tailnet rather than sketched from documentation,
+          published with the output they actually produced.
         </li>
         <li>
           <strong><a href="/drills">Drills.</a></strong> Written escalation case
