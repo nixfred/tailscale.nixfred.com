@@ -7,31 +7,31 @@ order: 7
 words: 4400
 sources:
   - id: kb-subnets
-    url: https://tailscale.com/kb/1019/subnets
+    url: https://tailscale.com/docs/features/subnet-routers
     title: Subnet routers
     checked: 2026-08-10
   - id: kb-exit-nodes
-    url: https://tailscale.com/kb/1103/exit-nodes
+    url: https://tailscale.com/docs/features/exit-nodes
     title: Exit nodes
     checked: 2026-08-10
   - id: kb-site-to-site
-    url: https://tailscale.com/kb/1214/site-to-site
+    url: https://tailscale.com/docs/features/site-to-site
     title: Site-to-site networking
     checked: 2026-08-10
   - id: kb-4via6
-    url: https://tailscale.com/kb/1201/4via6-subnets
+    url: https://tailscale.com/docs/features/subnet-routers/4via6-subnets
     title: 4via6 subnet routers
     checked: 2026-08-10
   - id: kb-app-connectors
-    url: https://tailscale.com/kb/1281/app-connectors
+    url: https://tailscale.com/docs/features/app-connectors
     title: App connectors
     checked: 2026-08-10
   - id: kb-policy-syntax
-    url: https://tailscale.com/kb/1337/policy-syntax
+    url: https://tailscale.com/docs/reference/syntax/policy-file
     title: Tailnet policy file syntax
     checked: 2026-08-10
   - id: kb-ha
-    url: https://tailscale.com/kb/1115/high-availability
+    url: https://tailscale.com/docs/how-to/set-up-high-availability
     title: High availability
     checked: 2026-08-10
   - id: docs-netfilter

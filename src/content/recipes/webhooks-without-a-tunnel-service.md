@@ -8,7 +8,7 @@ order: 3
 words: 1850
 sources:
   - id: kb-funnel
-    url: https://tailscale.com/kb/1223/funnel
+    url: https://tailscale.com/docs/features/tailscale-funnel
     title: Tailscale Funnel
     checked: 2026-08-11
   - id: docs-funnel
@@ -20,15 +20,15 @@ sources:
     title: tailscale funnel command
     checked: 2026-08-11
   - id: kb-serve
-    url: https://tailscale.com/kb/1242/tailscale-serve
+    url: https://tailscale.com/docs/reference/tailscale-cli/serve
     title: Tailscale Serve
     checked: 2026-08-11
   - id: kb-https
-    url: https://tailscale.com/kb/1153/enabling-https
+    url: https://tailscale.com/docs/how-to/set-up-https-certificates
     title: Enabling HTTPS
     checked: 2026-08-11
   - id: kb-acl-syntax
-    url: https://tailscale.com/kb/1337/acl-syntax
+    url: https://tailscale.com/docs/reference/syntax/policy-file
     title: Tailnet policy file syntax
     checked: 2026-08-11
   - id: blog-funnel
@@ -36,7 +36,7 @@ sources:
     title: "Tailscale Funnel: Securely Expose Local Services to the Internet"
     checked: 2026-08-11
   - id: kb-funnel-usecases
-    url: https://tailscale.com/kb/1247/funnel-serve-use-cases
+    url: https://tailscale.com/docs/reference/examples/funnel
     title: Funnel and Serve use cases
     checked: 2026-08-11
   - id: ts-changelog

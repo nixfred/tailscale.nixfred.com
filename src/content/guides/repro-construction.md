@@ -7,7 +7,7 @@ order: 2
 words: 3200
 sources:
   - id: kb-docker
-    url: https://tailscale.com/kb/1282/docker
+    url: https://tailscale.com/docs/features/containers/docker
     title: Docker
     checked: 2026-08-10
   - id: kb-docker-params
@@ -15,7 +15,7 @@ sources:
     title: Docker configuration parameters
     checked: 2026-08-10
   - id: kb-firewall-ports
-    url: https://tailscale.com/kb/1082/firewall-ports
+    url: https://tailscale.com/docs/reference/faq/firewall-ports
     title: What firewall ports should I open to use Tailscale?
     checked: 2026-08-10
   - id: kb-connect-failure
@@ -27,11 +27,11 @@ sources:
     title: Poor performance between tailnet devices
     checked: 2026-08-10
   - id: kb-cli
-    url: https://tailscale.com/kb/1080/cli
+    url: https://tailscale.com/docs/reference/tailscale-cli
     title: Tailscale CLI
     checked: 2026-08-10
   - id: kb-ephemeral
-    url: https://tailscale.com/kb/1111/ephemeral-nodes
+    url: https://tailscale.com/docs/features/ephemeral-nodes
     title: Ephemeral nodes
     checked: 2026-08-10
   - id: blog-nat

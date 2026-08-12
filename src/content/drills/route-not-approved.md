@@ -8,11 +8,11 @@ symptom: "The new subnet router is up and connected, but nothing behind 10.20.0.
 words: 1250
 sources:
   - id: kb-subnets
-    url: https://tailscale.com/kb/1019/subnets
+    url: https://tailscale.com/docs/features/subnet-routers
     title: Subnet routers
     checked: 2026-08-10
   - id: kb-client-metrics
-    url: https://tailscale.com/kb/1482/client-metrics
+    url: https://tailscale.com/docs/reference/tailscale-client-metrics
     title: Tailscale client metrics
     checked: 2026-08-10
   - id: ts-router-linux

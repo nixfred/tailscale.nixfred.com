@@ -7,23 +7,23 @@ order: 6
 words: 4500
 sources:
   - id: kb-magicdns
-    url: https://tailscale.com/kb/1081/magicdns
+    url: https://tailscale.com/docs/features/magicdns
     title: MagicDNS
     checked: 2026-08-10
   - id: kb-dns
-    url: https://tailscale.com/kb/1054/dns
+    url: https://tailscale.com/docs/reference/dns-in-tailscale
     title: DNS in Tailscale (DNS settings)
     checked: 2026-08-10
   - id: kb-quad100
-    url: https://tailscale.com/kb/1381/what-is-quad100
+    url: https://tailscale.com/docs/reference/quad100
     title: What is 100.100.100.100?
     checked: 2026-08-10
   - id: kb-tailnet-name
-    url: https://tailscale.com/kb/1217/tailnet-name
+    url: https://tailscale.com/docs/concepts/tailnet-name
     title: Tailnet name
     checked: 2026-08-10
   - id: kb-linux-dns
-    url: https://tailscale.com/kb/1188/linux-dns
+    url: https://tailscale.com/docs/reference/linux-dns
     title: Configuring Linux DNS
     checked: 2026-08-10
   - id: docs-dns-reference
@@ -31,7 +31,7 @@ sources:
     title: DNS in Tailscale (reference)
     checked: 2026-08-10
   - id: kb-cli
-    url: https://tailscale.com/kb/1080/cli
+    url: https://tailscale.com/docs/reference/tailscale-cli
     title: Tailscale CLI
     checked: 2026-08-10
 ---

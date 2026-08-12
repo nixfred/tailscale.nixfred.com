@@ -7,7 +7,7 @@ order: 11
 words: 4600
 sources:
   - id: ts-cli
-    url: https://tailscale.com/kb/1080/cli
+    url: https://tailscale.com/docs/reference/tailscale-cli
     title: Tailscale CLI
     checked: 2026-08-10
   - id: ts-logging
@@ -15,23 +15,23 @@ sources:
     title: Logging overview
     checked: 2026-08-10
   - id: ts-client-metrics
-    url: https://tailscale.com/kb/1482/client-metrics
+    url: https://tailscale.com/docs/reference/tailscale-client-metrics
     title: Tailscale client metrics
     checked: 2026-08-10
   - id: ts-key-expiry
-    url: https://tailscale.com/kb/1028/key-expiry
+    url: https://tailscale.com/docs/features/access-control/key-expiry
     title: Key expiry
     checked: 2026-08-10
   - id: ts-quad100
-    url: https://tailscale.com/kb/1381/what-is-quad100
+    url: https://tailscale.com/docs/reference/quad100
     title: What is 100.100.100.100?
     checked: 2026-08-10
   - id: ts-firewall
-    url: https://tailscale.com/kb/1082/firewall-ports
+    url: https://tailscale.com/docs/reference/faq/firewall-ports
     title: What firewall ports should I open to use Tailscale?
     checked: 2026-08-10
   - id: ts-peer-relays
-    url: https://tailscale.com/kb/1591/peer-relays
+    url: https://tailscale.com/docs/features/peer-relay
     title: Peer relays
     checked: 2026-08-10
 ---

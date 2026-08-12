@@ -11,15 +11,15 @@ sources:
     title: How Tailscale works
     checked: 2026-08-10
   - id: cgnat-ips
-    url: https://tailscale.com/kb/1015/100.x-addresses
+    url: https://tailscale.com/docs/concepts/tailscale-ip-addresses
     title: IP addresses in the 100.x.y.z range
     checked: 2026-08-10
   - id: magicdns
-    url: https://tailscale.com/kb/1081/magicdns
+    url: https://tailscale.com/docs/features/magicdns
     title: MagicDNS
     checked: 2026-08-10
   - id: tailnet
-    url: https://tailscale.com/kb/1136/tailnet
+    url: https://tailscale.com/docs/concepts/tailnet
     title: What is a tailnet
     checked: 2026-08-10
   - id: opensource
@@ -31,19 +31,19 @@ sources:
     title: tailscale/tailscale GitHub repository
     checked: 2026-08-10
   - id: peer-relays
-    url: https://tailscale.com/kb/1591/peer-relays
+    url: https://tailscale.com/docs/features/peer-relay
     title: Peer relays
     checked: 2026-08-10
   - id: firewall-ports
-    url: https://tailscale.com/kb/1082/firewall-ports
+    url: https://tailscale.com/docs/reference/faq/firewall-ports
     title: What firewall ports should I open to use Tailscale?
     checked: 2026-08-10
   - id: macos-variants
-    url: https://tailscale.com/kb/1065/macos-variants
+    url: https://tailscale.com/docs/concepts/macos-variants
     title: Three ways to run Tailscale on macOS
     checked: 2026-08-10
   - id: key-expiry
-    url: https://tailscale.com/kb/1028/key-expiry
+    url: https://tailscale.com/docs/features/access-control/key-expiry
     title: Key expiry
     checked: 2026-08-10
 ---

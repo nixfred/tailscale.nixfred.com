@@ -8,11 +8,11 @@ symptom: "Ping works from node-a to node-b but not the other way, so routing is 
 words: 1350
 sources:
   - id: kb-acls
-    url: https://tailscale.com/kb/1018/acls
+    url: https://tailscale.com/docs/features/access-control/acls
     title: Manage permissions using ACLs
     checked: 2026-08-10
   - id: kb-acl-syntax
-    url: https://tailscale.com/kb/1337/acl-syntax
+    url: https://tailscale.com/docs/reference/syntax/policy-file
     title: Syntax reference for the tailnet policy file
     checked: 2026-08-10
   - id: ping-types

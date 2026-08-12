@@ -7,15 +7,15 @@ order: 5
 words: 4500
 sources:
   - id: kb-acls
-    url: https://tailscale.com/kb/1018/acls
+    url: https://tailscale.com/docs/features/access-control/acls
     title: Manage permissions using ACLs
     checked: 2026-08-10
   - id: kb-syntax
-    url: https://tailscale.com/kb/1337/acl-syntax
+    url: https://tailscale.com/docs/reference/syntax/policy-file
     title: Tailnet policy file syntax
     checked: 2026-08-10
   - id: kb-grants
-    url: https://tailscale.com/kb/1324/grants
+    url: https://tailscale.com/docs/features/access-control/grants
     title: Grants
     checked: 2026-08-10
   - id: blog-grants-ga
@@ -23,19 +23,19 @@ sources:
     title: Grants generally available as an easier option to ACL syntax
     checked: 2026-08-10
   - id: kb-autogroups
-    url: https://tailscale.com/kb/1396/autogroups
+    url: https://tailscale.com/docs/reference/targets-and-selectors
     title: Autogroups
     checked: 2026-08-10
   - id: kb-ssh
-    url: https://tailscale.com/kb/1193/tailscale-ssh
+    url: https://tailscale.com/docs/features/tailscale-ssh
     title: Tailscale SSH
     checked: 2026-08-10
   - id: kb-posture
-    url: https://tailscale.com/kb/1288/device-posture
+    url: https://tailscale.com/docs/features/device-posture
     title: Device posture
     checked: 2026-08-10
   - id: kb-tags
-    url: https://tailscale.com/kb/1068/tags
+    url: https://tailscale.com/docs/features/tags
     title: Tags
     checked: 2026-08-10
   - id: blog-how-works

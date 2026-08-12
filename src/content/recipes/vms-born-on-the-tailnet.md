@@ -8,27 +8,27 @@ order: 1
 words: 2050
 sources:
   - id: kb-auth-keys
-    url: https://tailscale.com/kb/1085/auth-keys
+    url: https://tailscale.com/docs/features/access-control/auth-keys
     title: Auth keys
     checked: 2026-08-11
   - id: kb-tags
-    url: https://tailscale.com/kb/1068/tags
+    url: https://tailscale.com/docs/features/tags
     title: Tags
     checked: 2026-08-11
   - id: kb-install-linux
-    url: https://tailscale.com/kb/1031/install-linux
+    url: https://tailscale.com/docs/install/linux
     title: Install Tailscale on Linux
     checked: 2026-08-11
   - id: kb-firewall-ports
-    url: https://tailscale.com/kb/1082/firewall-ports
+    url: https://tailscale.com/docs/reference/faq/firewall-ports
     title: What firewall ports should I open to use Tailscale?
     checked: 2026-08-11
   - id: kb-acl-autoapprovers
-    url: https://tailscale.com/kb/1337/acl-syntax
+    url: https://tailscale.com/docs/reference/syntax/policy-file
     title: Tailnet policy file syntax
     checked: 2026-08-11
   - id: kb-cli
-    url: https://tailscale.com/kb/1080/cli
+    url: https://tailscale.com/docs/reference/tailscale-cli
     title: Tailscale CLI
     checked: 2026-08-11
 ---

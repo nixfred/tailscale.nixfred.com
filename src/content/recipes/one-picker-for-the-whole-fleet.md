@@ -8,19 +8,19 @@ order: 2
 words: 1850
 sources:
   - id: kb-magicdns
-    url: https://tailscale.com/kb/1081/magicdns
+    url: https://tailscale.com/docs/features/magicdns
     title: MagicDNS
     checked: 2026-08-11
   - id: kb-ssh
-    url: https://tailscale.com/kb/1193/tailscale-ssh
+    url: https://tailscale.com/docs/features/tailscale-ssh
     title: Tailscale SSH
     checked: 2026-08-11
   - id: kb-cli
-    url: https://tailscale.com/kb/1080/cli
+    url: https://tailscale.com/docs/reference/tailscale-cli
     title: Tailscale CLI
     checked: 2026-08-11
   - id: kb-100x
-    url: https://tailscale.com/kb/1015/100.x-addresses
+    url: https://tailscale.com/docs/concepts/tailscale-ip-addresses
     title: What are these 100.x.y.z addresses?
     checked: 2026-08-11
 ---

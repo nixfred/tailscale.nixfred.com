@@ -7,35 +7,35 @@ order: 4
 words: 5300
 sources:
   - id: sso-providers
-    url: https://tailscale.com/kb/1013/sso-providers
+    url: https://tailscale.com/docs/integrations/identity
     title: Identity providers
     checked: 2026-08-10
   - id: auth-keys
-    url: https://tailscale.com/kb/1085/auth-keys
+    url: https://tailscale.com/docs/features/access-control/auth-keys
     title: Auth keys
     checked: 2026-08-10
   - id: oauth-clients
-    url: https://tailscale.com/kb/1215/oauth-clients
+    url: https://tailscale.com/docs/features/oauth-clients
     title: OAuth clients
     checked: 2026-08-10
   - id: tags
-    url: https://tailscale.com/kb/1068/tags
+    url: https://tailscale.com/docs/features/tags
     title: Tags
     checked: 2026-08-10
   - id: key-expiry
-    url: https://tailscale.com/kb/1028/key-expiry
+    url: https://tailscale.com/docs/features/access-control/key-expiry
     title: Key expiry
     checked: 2026-08-10
   - id: device-approval
-    url: https://tailscale.com/kb/1099/device-approval
+    url: https://tailscale.com/docs/features/access-control/device-management/device-approval
     title: Device approval
     checked: 2026-08-10
   - id: user-approval
-    url: https://tailscale.com/kb/1239/user-approval
+    url: https://tailscale.com/docs/features/access-control/user-approval
     title: User approval
     checked: 2026-08-10
   - id: acl-syntax
-    url: https://tailscale.com/kb/1337/acl-syntax
+    url: https://tailscale.com/docs/reference/syntax/policy-file
     title: ACL syntax reference
     checked: 2026-08-10
   - id: wif-docs

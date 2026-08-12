@@ -8,15 +8,15 @@ symptom: "Tailscale works fine from the office but transfers are painfully slow,
 words: 1250
 sources:
   - id: firewall-ports
-    url: https://tailscale.com/kb/1082/firewall-ports
+    url: https://tailscale.com/docs/reference/faq/firewall-ports
     title: What firewall ports should I open to use Tailscale?
     checked: 2026-08-10
   - id: cli-netcheck
-    url: https://tailscale.com/kb/1080/cli
+    url: https://tailscale.com/docs/reference/tailscale-cli
     title: Tailscale CLI
     checked: 2026-08-10
   - id: derp-servers
-    url: https://tailscale.com/kb/1232/derp-servers
+    url: https://tailscale.com/docs/reference/derp-servers
     title: DERP servers
     checked: 2026-08-10
   - id: netcheck-source

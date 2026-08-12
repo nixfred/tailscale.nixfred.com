@@ -7,7 +7,7 @@ order: 3
 words: 2900
 sources:
   - id: ts-cli
-    url: https://tailscale.com/kb/1080/cli
+    url: https://tailscale.com/docs/reference/tailscale-cli
     title: Tailscale CLI
     checked: 2026-08-10
   - id: ts-debug-cli-src
@@ -47,7 +47,7 @@ sources:
     title: google/pprof tool documentation
     checked: 2026-08-10
   - id: kb-client-metrics
-    url: https://tailscale.com/kb/1482/client-metrics
+    url: https://tailscale.com/docs/reference/tailscale-client-metrics
     title: Tailscale client metrics
     checked: 2026-08-10
 ---

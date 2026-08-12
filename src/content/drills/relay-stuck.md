@@ -8,7 +8,7 @@ symptom: "Both machines show active; relay in tailscale status and file sync bet
 words: 1500
 sources:
   - id: cli-netcheck
-    url: https://tailscale.com/kb/1080/cli
+    url: https://tailscale.com/docs/reference/tailscale-cli
     title: Tailscale CLI
     checked: 2026-08-10
   - id: nat-traversal
@@ -20,7 +20,7 @@ sources:
     title: Tailscale Peer Relays
     checked: 2026-08-10
   - id: connection-types
-    url: https://tailscale.com/kb/1257/connection-types
+    url: https://tailscale.com/docs/reference/connection-types
     title: Connection types
     checked: 2026-08-10
   - id: changelog
@@ -28,7 +28,7 @@ sources:
     title: Changelog
     checked: 2026-08-10
   - id: derp-servers
-    url: https://tailscale.com/kb/1232/derp-servers
+    url: https://tailscale.com/docs/reference/derp-servers
     title: DERP servers
     checked: 2026-08-10
 ---

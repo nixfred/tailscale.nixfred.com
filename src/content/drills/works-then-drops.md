@@ -8,7 +8,7 @@ symptom: "Big copies to our build server freeze for about a minute whenever I le
 words: 1600
 sources:
   - id: connection-types
-    url: https://tailscale.com/kb/1257/connection-types
+    url: https://tailscale.com/docs/reference/connection-types
     title: Connection types
     checked: 2026-08-10
   - id: nat-traversal
@@ -24,11 +24,11 @@ sources:
     title: "WireGuard: Next Generation Kernel Network Tunnel"
     checked: 2026-08-10
   - id: derp-servers
-    url: https://tailscale.com/kb/1232/derp-servers
+    url: https://tailscale.com/docs/reference/derp-servers
     title: DERP servers
     checked: 2026-08-10
   - id: firewall-ports
-    url: https://tailscale.com/kb/1082/firewall-ports
+    url: https://tailscale.com/docs/reference/faq/firewall-ports
     title: What firewall ports should I open to use Tailscale?
     checked: 2026-08-10
   - id: derp-map

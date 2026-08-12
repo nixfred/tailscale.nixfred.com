@@ -47,7 +47,7 @@ sources:
     title: Introducing Tailscale Peer Relays (Tailscale blog, 2025-10-29)
     checked: 2026-08-10
   - id: derp-kb
-    url: https://tailscale.com/kb/1232/derp-servers
+    url: https://tailscale.com/docs/reference/derp-servers
     title: DERP servers (Tailscale KB)
     checked: 2026-08-10
 ---

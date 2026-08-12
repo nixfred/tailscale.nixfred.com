@@ -11,11 +11,11 @@ sources:
     title: How NAT traversal works
     checked: 2026-08-10
   - id: derp-kb
-    url: https://tailscale.com/kb/1232/derp-servers
+    url: https://tailscale.com/docs/reference/derp-servers
     title: DERP servers
     checked: 2026-08-10
   - id: cli-kb
-    url: https://tailscale.com/kb/1080/cli
+    url: https://tailscale.com/docs/reference/tailscale-cli
     title: Tailscale CLI
     checked: 2026-08-10
   - id: conn-types

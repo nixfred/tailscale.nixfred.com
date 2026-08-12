@@ -8,11 +8,11 @@ symptom: "The exit node makes my internet unusable, but Tailscale transfers to m
 words: 1450
 sources:
   - id: kb-exit-nodes
-    url: https://tailscale.com/kb/1103/exit-nodes
+    url: https://tailscale.com/docs/features/exit-nodes
     title: Exit nodes (route all traffic)
     checked: 2026-08-10
   - id: kb-derp
-    url: https://tailscale.com/kb/1232/derp-servers
+    url: https://tailscale.com/docs/reference/derp-servers
     title: DERP servers
     checked: 2026-08-10
   - id: kb-peer-relays
@@ -20,11 +20,11 @@ sources:
     title: Tailscale Peer Relays
     checked: 2026-08-10
   - id: kb-connection-types
-    url: https://tailscale.com/kb/1257/connection-types
+    url: https://tailscale.com/docs/reference/connection-types
     title: Connection types
     checked: 2026-08-10
   - id: kb-firewall-ports
-    url: https://tailscale.com/kb/1082/firewall-ports
+    url: https://tailscale.com/docs/reference/faq/firewall-ports
     title: What firewall ports should I open to use Tailscale?
     checked: 2026-08-10
   - id: changelog

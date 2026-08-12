@@ -7,11 +7,11 @@ order: 4
 words: 3200
 sources:
   - id: kb-troubleshooting
-    url: https://tailscale.com/kb/1023/troubleshooting
+    url: https://tailscale.com/docs/reference/troubleshooting
     title: Troubleshooting guide
     checked: 2026-08-10
   - id: kb-cli
-    url: https://tailscale.com/kb/1080/cli
+    url: https://tailscale.com/docs/reference/tailscale-cli
     title: Tailscale CLI
     checked: 2026-08-10
 ---
