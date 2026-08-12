@@ -1,0 +1,168 @@
+---
+// Labs index: exercises run on a real tailnet, published sanitized.
+import Shell from '../../layouts/Shell.astro';
+import { getCollection } from 'astro:content';
+
+const labs = (await getCollection('labs')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const disruptive = labs.filter((l) => l.data.disruptive).length;
+---
+
+<Shell
+  title="Labs · Tailscale Field Guide"
+  description="Exercises run against a real multi machine tailnet, with the real output and the real findings, published with generic hostnames."
+>
+  <main id="main">
+    <header class="page-head">
+      <p class="eyebrow">Run on real hardware</p>
+      <h1>Labs: what actually happened.</h1>
+      <p class="lede">
+        Every lab here was executed against a live tailnet of real machines
+        across multiple providers, not sketched from documentation. The output
+        is the output, including the runs that produced an answer nobody
+        expected. Hostnames and addresses are genericized; the findings are not.
+      </p>
+
+      <div class="diagram-wrap">
+        <svg
+          viewBox="0 0 760 190"
+          role="img"
+          aria-label="Labs are split into read only exercises that change nothing and disruptive ones that deliberately break a working path and then restore it"
+        >
+          <title>Read only labs versus disruptive labs</title>
+          <rect x="20" y="24" width="340" height="120" rx="10" fill="var(--diagram-bg)" stroke="var(--diagram-accent)" stroke-width="2.5" />
+          <text x="190" y="54" text-anchor="middle" fill="var(--diagram-accent)" font-size="14" font-family="var(--font-mono)">read only</text>
+          <text x="190" y="80" text-anchor="middle" fill="var(--diagram-text)" font-size="12" font-family="var(--font-mono)">observes, measures, proves</text>
+          <text x="190" y="102" text-anchor="middle" fill="var(--diagram-text)" font-size="12" font-family="var(--font-mono)">changes nothing, safe to run</text>
+          <text x="190" y="124" text-anchor="middle" fill="var(--diagram-text)" font-size="12" font-family="var(--font-mono)">on a network you did not build</text>
+
+          <rect x="400" y="24" width="340" height="120" rx="10" fill="var(--diagram-bg)" stroke="var(--diagram-line)" stroke-width="1.5" stroke-dasharray="6 5" />
+          <text x="570" y="54" text-anchor="middle" fill="var(--diagram-text)" font-size="14" font-family="var(--font-mono)">disruptive</text>
+          <text x="570" y="80" text-anchor="middle" fill="var(--diagram-text)" font-size="12" font-family="var(--font-mono)">breaks a working path on purpose</text>
+          <text x="570" y="102" text-anchor="middle" fill="var(--diagram-text)" font-size="12" font-family="var(--font-mono)">every one states its blast radius</text>
+          <text x="570" y="124" text-anchor="middle" fill="var(--diagram-text)" font-size="12" font-family="var(--font-mono)">and how to put it back</text>
+
+          <text x="380" y="176" text-anchor="middle" fill="var(--diagram-text)" font-size="12" font-family="var(--font-mono)">start read only. always.</text>
+        </svg>
+      </div>
+
+      <p class="mono counts">
+        {labs.length} published · {labs.length - disruptive} read only · {disruptive} disruptive
+      </p>
+    </header>
+
+    <ol class="lab-list">
+      {labs.map((l) => (
+        <li>
+          <a class="row" href={`/labs/${l.data.slug}`}>
+            <span class="mono num">{String(l.data.order).padStart(2, '0')}</span>
+            <span class="body">
+              <span class="title">{l.data.title}</span>
+              <span class="desc">{l.data.description}</span>
+              <span class="mono ran">run {l.data.ran}</span>
+            </span>
+            <span class={`mono flag ${l.data.disruptive ? 'flag-hot' : ''}`}>
+              {l.data.disruptive ? 'disruptive' : 'read only'}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </main>
+</Shell>
+
+<style>
+  main {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .page-head {
+    padding: var(--space-6) 0 var(--space-4);
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+    max-width: 62ch;
+  }
+
+  .counts {
+    font-size: var(--text-sm);
+    color: var(--accent);
+  }
+
+  .lab-list {
+    list-style: none;
+    margin: var(--space-4) 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .row {
+    display: flex;
+    gap: var(--space-3);
+    align-items: baseline;
+    padding: var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    background: var(--card-bg);
+    transition: border-color var(--dur-fast) var(--ease-out);
+  }
+
+  .row:hover {
+    border-color: var(--accent);
+  }
+
+  .num {
+    color: var(--accent);
+    font-size: var(--text-sm);
+    flex-shrink: 0;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-lg);
+    line-height: 1.2;
+  }
+
+  .desc {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .ran {
+    color: var(--text-faint);
+    font-size: var(--text-xs);
+  }
+
+  .flag {
+    margin-left: auto;
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    color: var(--accent);
+  }
+
+  .flag-hot {
+    color: var(--callout-gotcha);
+  }
+</style>

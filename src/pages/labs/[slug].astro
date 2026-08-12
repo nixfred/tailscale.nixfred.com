@@ -1,0 +1,125 @@
+---
+// One lab.
+import Shell from '../../layouts/Shell.astro';
+import { getCollection, render } from 'astro:content';
+import TrackRail from '../../components/TrackRail.astro';
+
+export async function getStaticPaths() {
+  const labs = await getCollection('labs');
+  return labs.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const track = (await getCollection('labs')).map((l) => ({
+  slug: l.data.slug,
+  title: l.data.title,
+  order: l.data.order,
+}));
+const minutes = entry.data.words
+  ? Math.max(1, Math.round(entry.data.words / 230))
+  : null;
+---
+
+<Shell title={`${entry.data.title} · Labs · Tailscale Field Guide`} description={entry.data.description}>
+  <main id="main">
+    <header class="lab-head">
+      <p class="eyebrow mono">
+        Lab {String(entry.data.order).padStart(2, '0')} · {entry.data.disruptive ? 'disruptive' : 'read only'} · run {entry.data.ran}{minutes ? ` · ${minutes} min` : ''}
+      </p>
+      <h1>{entry.data.title}</h1>
+      <p class="lede">{entry.data.description}</p>
+      {entry.data.disruptive ? (
+        <p class="warn mono">
+          This lab deliberately breaks a working path. Read the blast radius and
+          the restore step before running any of it.
+        </p>
+      ) : (
+        <p class="safe mono">
+          Read only. Every command here observes; none change configuration.
+        </p>
+      )}
+    </header>
+
+    {track.length > 1 && <TrackRail guides={track} current={entry.data.slug} label="labs" />}
+
+    <article class="prose">
+      <Content />
+    </article>
+
+    <section class="sources" aria-label="Sources">
+      <h2>Sources</h2>
+      <ol>
+        {entry.data.sources.map((s) => (
+          <li>
+            <a href={s.url}>{s.title}</a>
+            <span class="mono checked">checked {s.checked}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <p class="back"><a href="/labs">All labs</a></p>
+  </main>
+</Shell>
+
+<style>
+  main {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .lab-head {
+    padding: var(--space-6) 0 var(--space-4);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: var(--space-5);
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+    max-width: 24ch;
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+    max-width: 60ch;
+  }
+
+  .safe,
+  .warn {
+    font-size: var(--text-sm);
+    border-left: 3px solid var(--accent);
+    padding-left: var(--space-3);
+    color: var(--text-muted);
+    max-width: 60ch;
+  }
+
+  .warn {
+    border-left-color: var(--callout-gotcha);
+  }
+
+  .sources {
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--line);
+  }
+
+  .sources h2 {
+    font-size: var(--text-xl);
+  }
+
+  .checked {
+    color: var(--text-faint);
+    font-size: var(--text-xs);
+    margin-left: var(--space-2);
+  }
+
+  .back {
+    margin: var(--space-5) 0;
+  }
+</style>
