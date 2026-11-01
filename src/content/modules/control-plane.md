@@ -101,7 +101,7 @@ The mechanism, for the two auth paths:
 **Auth keys.** You mint a key in the admin console (or via the API) and enroll non-interactively:
 
 ```
-sudo tailscale up --auth-key=tskey-auth-kFxxxxCNTRL-xxxxxxxxxxxxxxxxxxxxxxxx
+sudo tailscale up --auth-key=tskey-auth-XXXXXXXXXXXX
 ```
 
 This is the right path for machines with no human attached: cloud instances, containers, CI runners, appliances. Auth keys come in two base flavors with modifiers layered on:
@@ -265,7 +265,7 @@ Control traffic is easy to spot precisely because there is so little of it: HTTP
 Enrollment with an auth key, from a fresh cloud instance:
 
 ```
-$ sudo tailscale up --auth-key=tskey-auth-kF3xample1CNTRL-x9y8z7w6v5u4t3s2r1q0
+$ sudo tailscale up --auth-key=tskey-auth-XXXXXXXXXXXX
 Success.
 ```
 

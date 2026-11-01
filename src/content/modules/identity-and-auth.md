@@ -274,7 +274,7 @@ Identity work is control plane work: HTTPS to the coordination infrastructure, n
 Enrolling a server with a tagged, reusable, pre-approved key:
 
 ```
-$ sudo tailscale up --auth-key=tskey-auth-kx7EXAMPLECNTRL-aBcDeFgHiJkLmNoPqRsTuVwXyZ012345
+$ sudo tailscale up --auth-key=tskey-auth-XXXXXXXXXXXX
 $ tailscale status
 100.64.0.12   node-a       tag:prod     linux   -
 100.64.0.7    node-b       alice@example.com  linux   active; direct 203.0.113.7:41641
